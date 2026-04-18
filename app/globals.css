@@ -1,26 +1,121 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/* ─────────────────────────────────────────────
+   Flashback Labs — design tokens
+   Palette: Iron Man precision on white paper.
+   Hard rules:
+   - paper (#F6F6F3) is the body background. Never pure #FFFFFF.
+   - paper-raised (#FFFFFF) is ONLY for elevated cards/panels.
+   - ink (#0B0D10) is the text color. Never pure #000000.
+   - hotrod red appears on <5% of pixels, never as a surface.
+   - hud cyan is gated to data/tech elements only.
+   - No drop shadows. Use hairline (#D8D5CE) borders for elevation.
+   ───────────────────────────────────────────── */
+
+@theme {
+  /* Surfaces */
+  --color-paper: #f6f6f3;
+  --color-paper-raised: #ffffff;
+  --color-paper-sunk: #eeeeea;
+
+  /* Structure */
+  --color-hairline: #d8d5ce;
+  --color-ink: #0b0d10;
+  --color-ink-soft: #2a2f36;
+  --color-steel: #5a6470;
+
+  /* Accents — Iron Man */
+  --color-hotrod: #b3111a;
+  --color-hotrod-deep: #7a0a12;
+
+  --color-gold: #8b6914;
+  --color-gold-hi: #c8962e;
+
+  /* HUD cyan — data/tech only */
+  --color-hud: #0891b2;
+  --color-hud-deep: #0369a1;
+
+  /* Status */
+  --color-signal: #2e8b57;
+
+  /* Fonts — wired via next/font in layout.tsx */
+  --font-display: var(--font-nevera), "Space Grotesk", system-ui, -apple-system, sans-serif;
+  --font-sans: var(--font-inter), system-ui, -apple-system, sans-serif;
+  --font-mono: var(--font-jetbrains-mono), ui-monospace, "Menlo", monospace;
+  --font-accent: var(--font-glitch), ui-monospace, monospace;
+
+  /* Motion tokens (ms) */
+  --motion-fast: 220ms;
+  --motion-base: 420ms;
+  --motion-slow: 900ms;
+  --motion-epic: 1800ms;
+
+  /* Radii */
+  --radius-tech: 2px;
+  --radius-default: 4px;
+  --radius-card: 8px;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+/* ─────────────────────────────────────────────
+   Base
+   ───────────────────────────────────────────── */
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--color-paper);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  font-size: 16px;
+  line-height: 1.55;
+}
+
+::selection {
+  background: var(--color-hotrod);
+  color: var(--color-paper-raised);
+}
+
+/* Remove default focus rings; our components add explicit 2px ink outlines */
+*:focus-visible {
+  outline: 2px solid var(--color-ink);
+  outline-offset: 2px;
+}
+
+/* ─────────────────────────────────────────────
+   Hairline dotted grid overlay — used behind hero
+   and four-layer-stack sections. Engineering-drawing cue.
+   ───────────────────────────────────────────── */
+
+.bg-grid-hairline {
+  background-image: radial-gradient(
+    circle,
+    var(--color-hairline) 1px,
+    transparent 1px
+  );
+  background-size: 24px 24px;
+  background-position: 0 0;
+}
+
+/* Arc-reactor SVG — boot initial state is set via JS (utils.set + createDrawable),
+   so nothing here. The reactor SVG self-contains its pre-animation state. */
+
+/* ─────────────────────────────────────────────
+   Prefers-reduced-motion: animations snap to final state.
+   Components should also check the media query in JS and
+   skip anime.js timelines, but this is a belt-and-braces catch.
+   ───────────────────────────────────────────── */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
 }
