@@ -116,7 +116,7 @@ export default function EnterpriseProof() {
         <div className="border-t border-b border-[var(--color-hairline)] bg-[var(--color-paper-sunk)] py-10 mb-10">
           <ul className="flex flex-wrap justify-center gap-8 sm:flex-nowrap sm:gap-6 md:gap-10 list-none p-0 m-0">
             {CLIENTS.map((client) => (
-              <li key={client.id} className="flex-shrink-0">
+              <li key={client.id} className="basis-[calc(50%-1rem)] sm:basis-auto flex-shrink-0 flex justify-center">
                 <div
                   className="ep-box flex flex-col items-center justify-center gap-2 rounded-lg border border-[var(--color-hairline)] bg-[var(--color-paper-raised)] px-4 py-5"
                   style={{ width: 120, height: 96 }}
