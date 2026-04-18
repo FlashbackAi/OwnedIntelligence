@@ -319,7 +319,7 @@ export default function Infrastructure() {
       ref={rootRef}
       id="infrastructure"
       aria-labelledby="infra-heading"
-      className="relative w-full bg-paper overflow-hidden"
+      className="relative w-full bg-paper"
     >
       <div className="relative mx-auto max-w-[1280px] px-6 md:px-14 pt-16 md:pt-24 pb-40 md:pb-36">
         {/* Section marker */}
@@ -420,16 +420,16 @@ export default function Infrastructure() {
             </div>
           </div>
 
-          {/* Hint */}
-          <p className="infra-hint mt-8 font-mono text-[10px] md:text-[11px] tracking-[0.3em] uppercase text-steel text-center">
-            <span className="inline-flex items-center gap-3">
-              <span className="block h-px w-10 bg-ink/30" />
-              {active === -1
-                ? isDesktop ? "hover a layer to reveal its internals" : "tap a layer to reveal its internals"
-                : isDesktop ? "move off the stack to reset" : "tap again to reset"}
-              <span className="block h-px w-10 bg-ink/30" />
-            </span>
-          </p>
+          {/* Hint — only shown when a layer is active (prompt handles the idle state) */}
+          {active !== -1 && (
+            <p className="infra-hint mt-8 font-mono text-[10px] md:text-[11px] tracking-[0.3em] uppercase text-steel text-center">
+              <span className="inline-flex items-center gap-3">
+                <span className="block h-px w-10 bg-ink/30" />
+                {isDesktop ? "move off the stack to reset" : "tap again to reset"}
+                <span className="block h-px w-10 bg-ink/30" />
+              </span>
+            </p>
+          )}
         </div>
       </div>
     </section>

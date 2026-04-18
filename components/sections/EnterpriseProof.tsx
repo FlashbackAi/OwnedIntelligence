@@ -106,11 +106,11 @@ export default function EnterpriseProof() {
     >
       <div className="mx-auto max-w-[1240px] px-14">
         <p className="ep-marker font-mono text-[11px] uppercase tracking-widest text-[var(--color-steel)] mb-4">
-          Enterprise // 07
+          Enterprise 07
         </p>
 
         <h2 id="enterprise-heading" className="ep-headline font-mono text-xl md:text-2xl tracking-widest text-[var(--color-ink)] uppercase mb-12">
-          Paying Clients // No External Funding
+          Paying Clients · No External Funding
         </h2>
 
         <div className="border-t border-b border-[var(--color-hairline)] bg-[var(--color-paper-sunk)] py-10 mb-10">
