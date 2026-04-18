@@ -34,6 +34,7 @@ type Layer = {
   idx: number; // 0 = bottom, 3 = top
   numeral: string;
   name: string;
+  short: string; // drafting-style abbreviation for on-diagram callout
   kind: LayerKind;
   thesis: string;
   modules: string[];
@@ -45,6 +46,7 @@ const LAYERS: Layer[] = [
     idx: 0,
     numeral: "01",
     name: "Data",
+    short: "DATA",
     kind: "data",
     thesis: "Encrypted personal memory — yours, portable, permanent.",
     modules: ["Vault", "On-device store", "E2E sync"],
@@ -54,6 +56,7 @@ const LAYERS: Layer[] = [
     idx: 1,
     numeral: "02",
     name: "Infrastructure",
+    short: "INFRA",
     kind: "infra",
     thesis: "Compute that runs beside you, not behind a curtain.",
     modules: ["Edge runtime", "Sync fabric", "Local models"],
@@ -63,6 +66,7 @@ const LAYERS: Layer[] = [
     idx: 2,
     numeral: "03",
     name: "Intelligence",
+    short: "INTEL",
     kind: "intelligence",
     thesis: "A Jarvis that thinks in context, not in tokens.",
     modules: ["Retrieval", "Reasoning", "Memory graph"],
@@ -72,6 +76,7 @@ const LAYERS: Layer[] = [
     idx: 3,
     numeral: "04",
     name: "Verification",
+    short: "VERIFY",
     kind: "verify",
     thesis: "Proof that what thinks for you answers to you.",
     modules: ["Attestation", "zk-proofs", "Audit trail"],
@@ -81,24 +86,45 @@ const LAYERS: Layer[] = [
 
 /* ────── Geometry ────── */
 
-const CX = 360;
-const TOP_Y = 96;
-const THICKNESS = 58;
-const GAP = 14;
-const HW = 150; // half-width of top face diamond
-const HD = 68;  // half-depth of top face diamond
+const CX = 500;
+const TOP_Y = 110;
+const GAP = 18;
 
-function topFaceY(idx: number) {
-  const fromTop = 3 - idx;
-  return TOP_Y + fromTop * (THICKNESS + GAP);
+// Dramatic step-pyramid — each layer has its own width, depth, and height.
+type Size = { hw: number; hd: number; thickness: number };
+const LAYER_SIZES: Size[] = [
+  { hw: 180, hd: 82, thickness: 78 }, // 01 Data — heaviest foundation
+  { hw: 148, hd: 66, thickness: 64 }, // 02 Infrastructure
+  { hw: 120, hd: 54, thickness: 54 }, // 03 Intelligence
+  { hw: 92,  hd: 42, thickness: 46 }, // 04 Verification — slim cap
+];
+
+// Envelope maxima — used by tower-wide ornaments (ground, cables, bus).
+// HW/HD/THICKNESS aliases preserve call sites that reason about the outer envelope
+// (widest slab at bottom of the stack).
+const HW = LAYER_SIZES[0].hw;
+const HD = LAYER_SIZES[0].hd;
+const THICKNESS = LAYER_SIZES[0].thickness;
+
+function layerDims(idx: number): Size {
+  return LAYER_SIZES[idx] ?? LAYER_SIZES[0];
 }
 
-function topDiamond(yc: number) {
+/** y-position of a layer's TOP face, accumulating per-layer thickness from the top down. */
+function topFaceY(idx: number) {
+  let y = TOP_Y;
+  for (let i = 3; i > idx; i--) {
+    y += LAYER_SIZES[i].thickness + GAP;
+  }
+  return y;
+}
+
+function topDiamond(yc: number, hw: number, hd: number) {
   return {
-    F: [CX, yc + HD] as const,
-    R: [CX + HW, yc] as const,
-    B: [CX, yc - HD] as const,
-    L: [CX - HW, yc] as const,
+    F: [CX, yc + hd] as const,
+    R: [CX + hw, yc] as const,
+    B: [CX, yc - hd] as const,
+    L: [CX - hw, yc] as const,
   };
 }
 
@@ -175,8 +201,7 @@ export default function Infrastructure() {
 
     const enterST = ScrollTrigger.create({
       trigger: svgEl,
-      start: "top 78%",
-      end: "bottom top",
+      start: "top 80%",
       once: true,
       onEnter: () => {
         animate(slabGroups, {
@@ -296,7 +321,7 @@ export default function Infrastructure() {
       aria-labelledby="infra-heading"
       className="relative w-full bg-paper overflow-hidden"
     >
-      <div className="relative mx-auto max-w-[1280px] px-6 md:px-14 pt-16 md:pt-24 pb-24 md:pb-36">
+      <div className="relative mx-auto max-w-[1280px] px-6 md:px-14 pt-16 md:pt-24 pb-40 md:pb-36">
         {/* Section marker */}
         <div className="infra-section-marker flex items-center gap-4">
           <span className="block h-px w-14 bg-ink/50" aria-hidden="true" />
@@ -323,33 +348,51 @@ export default function Infrastructure() {
           </h2>
         </div>
 
-        {/* Tower + panel split — tower slides left on hover, panel enters from right */}
+        {/* Tower + panel */}
         <div
-          className="mt-14 md:mt-20 relative"
+          className="mt-16 md:mt-24 lg:mt-32 relative"
           onMouseLeave={handleLeaveAll}
         >
-          <div className="flex items-center gap-3 mb-6">
-            <span className="font-mono text-[10px] tracking-[0.32em] uppercase text-steel">
-              stack · isometric · 01 → 04
+          {/* Status bar */}
+          <div className="flex items-center gap-3 mb-4 md:mb-6">
+            <span className="font-mono text-[10px] tracking-[0.32em] uppercase text-steel whitespace-nowrap">
+              <span className="hidden sm:inline">stack · isometric · </span>01 → 04
             </span>
             <span className="block h-px flex-1 bg-ink/20" aria-hidden="true" />
-            <span className="font-mono text-[10px] tracking-[0.32em] uppercase text-steel">
+            <span className="font-mono text-[10px] tracking-[0.32em] uppercase text-steel whitespace-nowrap">
               {active === -1 ? "idle" : `active · ${LAYERS[active].numeral}`}
             </span>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-start">
-            {/* Tower column — shifts right by 50% when idle (to read as centered on page) */}
+          {/* Tap / hover prompt */}
+          <div
+            className="relative h-7 mb-6 md:mb-10 flex items-center justify-center pointer-events-none"
+            aria-hidden="true"
+          >
+            <HoverPrompt visible={active === -1} isMobile={!isDesktop} />
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-[1.4fr_1fr] gap-6 lg:gap-10 items-start">
+            {/* Tower — desktop: scale 2→1.2 + slide left. Mobile: scale(1.5) fixed, no slide */}
             <div
               className="relative"
-              style={{
-                transform:
-                  isDesktop && active === -1
-                    ? "translateX(50%)"
-                    : "translateX(0)",
-                transition:
-                  "transform 700ms cubic-bezier(0.22, 0.61, 0.36, 1)",
-              }}
+              style={
+                isDesktop
+                  ? {
+                      transform:
+                        active === -1
+                          ? "translateX(45%) scale(2)"
+                          : "translateX(0) scale(1.2)",
+                      transformOrigin: "center top",
+                      transition:
+                        "transform 780ms cubic-bezier(0.22, 0.61, 0.36, 1)",
+                    }
+                  : {
+                      transform: "scale(1.5)",
+                      transformOrigin: "center top",
+                      marginBottom: "64px",
+                    }
+              }
             >
               <TowerSVG
                 ref={svgRef}
@@ -360,13 +403,14 @@ export default function Infrastructure() {
               />
             </div>
 
-            {/* Panel column — hidden until hover */}
+            {/* Panel — desktop: slides in from right. Mobile: slides in from below */}
             <div
-              className="relative lg:min-h-[520px]"
+              className="relative"
               style={{
                 opacity: active === -1 ? 0 : 1,
-                transform:
-                  active === -1 ? "translateX(24px)" : "translateX(0)",
+                transform: active === -1
+                  ? isDesktop ? "translateX(20px)" : "translateY(16px)"
+                  : "translate(0,0)",
                 transition:
                   "opacity 520ms ease-out, transform 640ms cubic-bezier(0.22, 0.61, 0.36, 1)",
                 pointerEvents: active === -1 ? "none" : "auto",
@@ -376,13 +420,13 @@ export default function Infrastructure() {
             </div>
           </div>
 
-          {/* Hint line */}
+          {/* Hint */}
           <p className="infra-hint mt-8 font-mono text-[10px] md:text-[11px] tracking-[0.3em] uppercase text-steel text-center">
             <span className="inline-flex items-center gap-3">
               <span className="block h-px w-10 bg-ink/30" />
               {active === -1
-                ? "hover a layer to reveal its internals"
-                : "move off the stack to reset"}
+                ? isDesktop ? "hover a layer to reveal its internals" : "tap a layer to reveal its internals"
+                : isDesktop ? "move off the stack to reset" : "tap again to reset"}
               <span className="block h-px w-10 bg-ink/30" />
             </span>
           </p>
@@ -436,57 +480,149 @@ function DetailPanel({ layer }: { layer: Layer | null }) {
       aria-live="polite"
     >
       {layer ? (
-        <div className="relative border border-ink/20 bg-paper-raised p-6 md:p-8">
-          <PanelCornerMarks />
+        <div className="relative overflow-hidden bg-paper-raised border border-ink/20"
+          style={{
+            backgroundImage: "radial-gradient(circle, #D8D5CE 0.8px, transparent 0.8px)",
+            backgroundSize: "18px 18px",
+          }}
+        >
+          {/* Hotrod left accent bar */}
+          <div className="absolute left-0 top-0 bottom-0 w-[3px] bg-hotrod" />
 
-          <div className="infra-panel-item flex items-baseline gap-4">
-            <span className="font-display text-ink/30 text-[clamp(2rem,3vw,3rem)] leading-[0.9] tracking-[-0.02em]">
-              {layer.numeral}
-            </span>
-            <span className="inline-flex items-center gap-1.5 border border-hotrod/40 px-2 py-[3px] font-mono text-[9px] tracking-[0.32em] uppercase text-hotrod">
-              <span className="block h-[5px] w-[5px] bg-hotrod" />
-              ACTIVE
-            </span>
+          {/* Scan-line sweep (single pass on mount via CSS animation) */}
+          <div
+            className="absolute inset-0 pointer-events-none"
+            aria-hidden="true"
+            style={{
+              background: "linear-gradient(to bottom, transparent 0%, rgba(179,17,26,0.06) 50%, transparent 100%)",
+              backgroundSize: "100% 60px",
+              animation: "scanSweep 2s ease-out forwards",
+            }}
+          />
+
+          {/* Ghost numeral watermark — hidden on mobile to save space */}
+          <div
+            className="hidden sm:block absolute right-4 top-3 font-display leading-none tracking-[-0.04em] select-none pointer-events-none"
+            style={{ fontSize: "clamp(3rem,8vw,7rem)", color: "rgba(11,13,16,0.06)" }}
+            aria-hidden="true"
+          >
+            {layer.numeral}
           </div>
 
-          <h3 className="infra-panel-item mt-4 font-display text-ink text-[clamp(1.6rem,2.4vw,2.2rem)] leading-[1.06] tracking-[-0.015em]">
-            {layer.name}
-          </h3>
-
-          <p className="infra-panel-item mt-3 text-ink-soft text-[15px] leading-[1.55] max-w-[56ch]">
-            {layer.thesis}
-          </p>
-
-          <div className="infra-panel-item mt-7 border-t border-ink/15 pt-5">
-            <div className="flex items-center gap-3 mb-4">
-              <span className="block h-px w-8 bg-ink/40" aria-hidden="true" />
-              <span className="font-mono text-[10px] tracking-[0.3em] uppercase text-steel">
-                modules · 03
+          <div className="relative p-4 sm:p-5 md:p-6 pl-6 sm:pl-7 md:pl-9">
+            {/* Top row */}
+            <div className="infra-panel-item flex items-center gap-2">
+              <span className="block h-[6px] w-[6px] rounded-full bg-hotrod shrink-0" />
+              <span className="font-mono text-[8px] tracking-[0.34em] uppercase text-hotrod">
+                {layer.numeral} · ACTIVE
+              </span>
+              <span className="block h-px flex-1 bg-hotrod/30" />
+              <span className="font-mono text-[8px] tracking-[0.26em] uppercase text-steel">
+                {layer.kind.toUpperCase()}
               </span>
             </div>
-            <ul className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-              {layer.modules.map((m, i) => (
-                <li
-                  key={m}
-                  className="relative border border-ink/20 bg-paper px-3 py-3"
-                >
-                  <span className="block font-mono text-[9.5px] tracking-[0.3em] uppercase text-gold">
-                    {String(i + 1).padStart(2, "0")}
-                  </span>
-                  <span className="block mt-1 font-display text-ink text-[15px] leading-[1.15] tracking-[-0.01em]">
-                    {m}
-                  </span>
-                </li>
-              ))}
-            </ul>
+
+            {/* Name */}
+            <h3
+              className="infra-panel-item mt-3 font-display text-ink leading-[1.02] tracking-[-0.02em]"
+              style={{ fontSize: "clamp(1.4rem,3vw,2.2rem)" }}
+            >
+              {layer.name}
+            </h3>
+            <div className="infra-panel-item mt-1.5 flex items-center gap-2">
+              <span className="block h-[2px] w-8 bg-hotrod" />
+              <span className="block h-[2px] w-2 bg-hotrod/40" />
+            </div>
+
+            {/* Thesis */}
+            <p className="infra-panel-item mt-3 text-ink-soft text-[13px] leading-[1.55]">
+              {layer.thesis}
+            </p>
+
+            {/* Modules */}
+            <div className="infra-panel-item mt-5">
+              <div className="flex items-center gap-2 mb-2">
+                <span className="font-mono text-[8px] tracking-[0.34em] uppercase text-steel">
+                  MODULES
+                </span>
+                <span className="block h-px flex-1 bg-ink/15" />
+                <span className="font-mono text-[8px] tracking-[0.26em] uppercase text-steel">
+                  03
+                </span>
+              </div>
+              <ul className="grid grid-cols-3 gap-1.5">
+                {layer.modules.map((m, i) => (
+                  <li key={m} className="relative bg-paper border border-ink/20 p-2">
+                    <span className="absolute top-0 left-0 w-[4px] h-[4px] border-t border-l border-hotrod/60" />
+                    <span className="absolute bottom-0 right-0 w-[4px] h-[4px] border-b border-r border-hotrod/60" />
+                    <span className="block font-mono text-[7.5px] tracking-[0.28em] uppercase text-hotrod/80">
+                      {String(i + 1).padStart(2, "0")}
+                    </span>
+                    <span className="block mt-0.5 font-display text-ink text-[11px] leading-[1.25] tracking-[-0.01em]">
+                      {m}
+                    </span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* Spec block */}
+            <div className="infra-panel-item mt-4 bg-paper border border-ink/20 px-3 py-2 flex items-center gap-2">
+              <span className="block w-[5px] h-[5px] bg-hotrod shrink-0" />
+              <span className="font-mono text-[8.5px] tracking-[0.26em] uppercase text-ink/70">
+                {layer.spec}
+              </span>
+            </div>
+
+            {/* Bottom meta row */}
+            <div className="infra-panel-item mt-3 flex items-center justify-between">
+              <span className="font-mono text-[8.5px] tracking-[0.32em] uppercase text-steel">
+                flashback · stack · {layer.numeral}/04
+              </span>
+              <div className="flex items-center gap-1.5">
+                {[0, 1, 2, 3].map((i) => (
+                  <span
+                    key={i}
+                    className="block h-[5px] rounded-full"
+                    style={{
+                      width: i <= layer.idx ? "18px" : "6px",
+                      background: i <= layer.idx ? "#B3111A" : "rgba(11,13,16,0.2)",
+                      transition: "all 300ms",
+                    }}
+                  />
+                ))}
+              </div>
+            </div>
           </div>
 
-          <div className="infra-panel-item mt-6 flex items-start gap-3 font-mono text-[10px] tracking-[0.28em] uppercase text-steel">
-            <span className="block h-[9px] w-[9px] border border-ink/40 mt-[2px]" />
-            <span className="text-ink/80">{layer.spec}</span>
-          </div>
+          {/* Outer corner marks */}
+          <PanelCornerMarks />
         </div>
       ) : null}
+    </div>
+  );
+}
+
+/* ────── Hover prompt — visible only in idle state ────── */
+
+function HoverPrompt({ visible, isMobile = false }: { visible: boolean; isMobile?: boolean }) {
+  return (
+    <div
+      aria-hidden="true"
+      className="flex items-center gap-2 whitespace-nowrap"
+      style={{
+        opacity: visible ? 1 : 0,
+        transform: `translateY(${visible ? "0" : "-4px"})`,
+        transition: "opacity 420ms ease-out, transform 420ms ease-out",
+      }}
+    >
+      <span className="block h-[7px] w-[7px] rounded-full bg-hotrod" />
+      <span className="font-mono text-[10px] tracking-[0.32em] uppercase text-hotrod">
+        {isMobile ? "tap a layer" : "hover a layer"}
+      </span>
+      <span className="font-mono text-[10px] tracking-[0.32em] uppercase text-ink">
+        ↓
+      </span>
     </div>
   );
 }
@@ -526,8 +662,8 @@ const TowerSVG = forwardRef<SVGSVGElement, TowerProps>(function TowerSVG(
   { active, onEnter, onLeaveAll, onTap },
   ref,
 ) {
-  const VB_W = 720;
-  const VB_H = 560;
+  const VB_W = 1000;
+  const VB_H = 640;
 
   // Spine path — runs through center of every top face + extends into ground.
   const spineTop = topFaceY(3) - HD - 16;
@@ -538,7 +674,7 @@ const TowerSVG = forwardRef<SVGSVGElement, TowerProps>(function TowerSVG(
     <svg
       ref={ref}
       viewBox={`0 0 ${VB_W} ${VB_H}`}
-      className="w-full h-auto max-w-[820px] mx-auto block"
+      className="w-full h-auto max-w-none sm:max-w-[520px] lg:max-w-[600px] mx-auto block"
       aria-label="Flashback stack — four layers, bottom to top: data, infrastructure, intelligence, verification"
       onMouseLeave={onLeaveAll}
     >
@@ -576,9 +712,6 @@ const TowerSVG = forwardRef<SVGSVGElement, TowerProps>(function TowerSVG(
         strokeWidth="1"
         strokeDasharray="2 4"
       />
-
-      {/* Vertical dimension ticks along left edge */}
-      <DimensionRail />
 
       {/* Service cables + junctions (behind slabs so they show through translucent walls) */}
       <TowerInfrastructure />
@@ -689,9 +822,10 @@ function SlabGroup({
   onTap: () => void;
 }) {
   const yc = topFaceY(layer.idx);
-  const yb = yc + THICKNESS;
-  const top = topDiamond(yc);
-  const bot = topDiamond(yb);
+  const { hw, hd, thickness } = layerDims(layer.idx);
+  const yb = yc + thickness;
+  const top = topDiamond(yc, hw, hd);
+  const bot = topDiamond(yb, hw, hd);
 
   const topFace = `${top.F[0]},${top.F[1]} ${top.R[0]},${top.R[1]} ${top.B[0]},${top.B[1]} ${top.L[0]},${top.L[1]}`;
   const rightFace = `${top.F[0]},${top.F[1]} ${top.R[0]},${top.R[1]} ${bot.R[0]},${bot.R[1]} ${bot.F[0]},${bot.F[1]}`;
@@ -729,7 +863,7 @@ function SlabGroup({
         x1={top.B[0]}
         y1={top.B[1]}
         x2={bot.F[0] - 0} /* invisible node; we only use back-top to back-bottom */
-        y2={top.B[1] + THICKNESS}
+        y2={top.B[1] + thickness}
         stroke="#0B0D10"
         strokeOpacity="0.18"
         strokeWidth="0.85"
@@ -762,7 +896,7 @@ function SlabGroup({
       <TopFaceBrackets top={top} />
 
       {/* Always-visible wall detail: ribs + mid-band + port row */}
-      <SlabWallDetails top={top} bot={bot} />
+      <SlabWallDetails top={top} bot={bot} thickness={thickness} />
 
       {/* Always-visible top-face decor: scan-grid + bolts + inset frame + label */}
       <SlabTopDecor top={top} layer={layer} active={active} />
@@ -789,9 +923,11 @@ function SlabGroup({
 function SlabWallDetails({
   top,
   bot,
+  thickness,
 }: {
   top: ReturnType<typeof topDiamond>;
   bot: ReturnType<typeof topDiamond>;
+  thickness: number;
 }) {
   const lerp = (a: readonly number[], b: readonly number[], t: number) => [
     a[0] + t * (b[0] - a[0]),
@@ -811,7 +947,7 @@ function SlabWallDetails({
     t2: lerp(bot.L, bot.F, t),
   }));
   // Mid-band: horizontal dashed line midway down each wall
-  const mid = (p: readonly number[]) => [p[0], p[1] + THICKNESS / 2];
+  const mid = (p: readonly number[]) => [p[0], p[1] + thickness / 2];
   const rightMid = { a: mid(top.F), b: mid(top.R) };
   const leftMid = { a: mid(top.L), b: mid(top.F) };
   // Port row: 7 tiny square ports along each bottom edge, inset up by 6
@@ -1472,14 +1608,16 @@ function Leader({
   side: "left" | "right";
 }) {
   const yc = topFaceY(layer.idx);
+  const { hw } = layerDims(layer.idx);
 
   // Anchor on the corresponding slab top corner
   const [ex, ey] =
-    side === "right" ? [CX + HW, yc] : [CX - HW, yc];
+    side === "right" ? [CX + hw, yc] : [CX - hw, yc];
 
-  const bx = side === "right" ? 600 : 120;
+  // Labels sit well OUTSIDE the widest slab envelope (CX ± HW_MAX = 320–680).
+  const bx = side === "right" ? 810 : 190;
   const by = yc - 10;
-  const lx = side === "right" ? 616 : 104;
+  const lx = side === "right" ? 830 : 170;
 
   const d = `M ${ex} ${ey} L ${bx} ${by} L ${lx} ${by}`;
 
@@ -1523,11 +1661,11 @@ function Leader({
         y={by + 12}
         textAnchor={textAnchor}
         fontFamily="var(--font-display, sans-serif)"
-        fontSize="15"
+        fontSize="13"
         fill="#0B0D10"
-        style={{ letterSpacing: "-0.01em" }}
+        style={{ letterSpacing: "0.01em" }}
       >
-        {layer.name}
+        {layer.short}
       </text>
     </g>
   );

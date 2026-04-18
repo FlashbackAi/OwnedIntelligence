@@ -109,6 +109,12 @@ body {
    skip anime.js timelines, but this is a belt-and-braces catch.
    ───────────────────────────────────────────── */
 
+@keyframes scanSweep {
+  0%   { background-position: 0 -100%; opacity: 1; }
+  80%  { background-position: 0 200%; opacity: 1; }
+  100% { background-position: 0 200%; opacity: 0; }
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,

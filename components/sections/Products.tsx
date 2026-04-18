@@ -734,9 +734,8 @@ function SubCornerMarks() {
 
 function StatusDot() {
   return (
-    <span className="relative inline-flex" aria-hidden="true">
+    <span className="inline-flex" aria-hidden="true">
       <span className="block h-[7px] w-[7px] rounded-full bg-signal" />
-      <span className="absolute inset-0 block h-[7px] w-[7px] rounded-full bg-signal opacity-70 animate-ping" />
     </span>
   );
 }
