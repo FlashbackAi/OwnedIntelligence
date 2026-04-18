@@ -60,7 +60,7 @@ export default function EnterpriseProof() {
     gsap.set(sectionMarker, { opacity: 0, y: 8 });
     gsap.set(headline,      { opacity: 0, y: 12 });
     gsap.set(boxes,         { opacity: 0, y: 16 });
-    gsap.set(tagline,       { opacity: 0, y: 8 });
+    if (tagline) gsap.set(tagline,       { opacity: 0, y: 8 });
 
     const tl = gsap.timeline({
       scrollTrigger: { trigger: root, start: "top 78%", once: true },
@@ -94,7 +94,7 @@ export default function EnterpriseProof() {
     });
 
     return () => {
-      tl.scrollTrigger?.kill();
+      tl.kill();
     };
   }, []);
 
@@ -102,14 +102,14 @@ export default function EnterpriseProof() {
     <section
       ref={rootRef}
       className="relative py-24 md:py-36"
-      aria-label="Enterprise clients"
+      aria-labelledby="enterprise-heading"
     >
       <div className="mx-auto max-w-[1240px] px-14">
         <p className="ep-marker font-mono text-[11px] uppercase tracking-widest text-[var(--color-steel)] mb-4">
           Enterprise // 07
         </p>
 
-        <h2 className="ep-headline font-mono text-xl md:text-2xl tracking-widest text-[var(--color-ink)] uppercase mb-12">
+        <h2 id="enterprise-heading" className="ep-headline font-mono text-xl md:text-2xl tracking-widest text-[var(--color-ink)] uppercase mb-12">
           Paying Clients // No External Funding
         </h2>
 
