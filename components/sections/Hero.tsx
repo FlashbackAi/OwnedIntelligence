@@ -139,9 +139,9 @@ export default function Hero() {
       />
 
       <div className="relative mx-auto max-w-[1280px] px-6 md:px-14">
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-12 items-center min-h-[calc(100vh-160px)]">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-16 items-center min-h-[calc(100vh-160px)]">
           {/* ──── Left column ──── */}
-          <div className="md:col-span-7 relative order-2 md:order-1">
+          <div className="md:col-span-6 relative order-2 md:order-1">
             {/* Editorial eyebrow — replaces the `[ FLASHBACK // V1.0 ]` tag */}
             <div
               className="hero-byline flex items-center gap-4 mb-8 md:mb-10"
@@ -154,7 +154,7 @@ export default function Hero() {
             </div>
 
             {/* Headline */}
-            <h1 className="font-display text-ink leading-[0.98] tracking-[-0.025em] text-[clamp(2.5rem,6vw,5rem)]">
+            <h1 className="font-display text-ink leading-[1.06] tracking-[-0.02em] text-[clamp(2.4rem,5.5vw,4.5rem)]">
               {HEADLINE_LINES.map((line, lineIdx) => (
                 <span key={lineIdx} className="block">
                   {line.map((word, wordIdx) => {
@@ -198,28 +198,39 @@ export default function Hero() {
 
             {/* CTAs */}
             <div
-              className="hero-cta-row flex flex-col sm:flex-row gap-3 mt-8 md:mt-10"
+              className="hero-cta-row flex flex-col sm:flex-row gap-4 mt-8 md:mt-10"
               style={{ opacity: 0 }}
             >
+              {/* Primary — solid hotrod, skewed parallelogram */}
               <a
                 href="https://flashbackai.com"
-                className="inline-flex items-center justify-center px-7 py-3.5 bg-hotrod text-paper-raised font-mono text-[12px] tracking-[0.18em] uppercase rounded-[4px] transition-colors duration-200 hover:bg-hotrod-deep"
+                className="group relative inline-flex items-center justify-center px-8 py-3.5 bg-hotrod text-paper-raised font-mono text-[11px] tracking-[0.22em] uppercase overflow-hidden transition-colors duration-200 hover:bg-hotrod-deep"
+                style={{ clipPath: "polygon(10px 0%, 100% 0%, calc(100% - 10px) 100%, 0% 100%)" }}
               >
-                Meet Flashback AI →
+                {/* HUD corner accent top-right */}
+                <span aria-hidden="true" className="absolute top-0 right-0 w-2 h-2 border-t border-r border-paper-raised/40 pointer-events-none" />
+                <span style={{ display: "inline-block" }}>Meet Flashback AI →</span>
               </a>
+
+              {/* Secondary — outlined, skewed, ink fill on hover */}
               <a
                 href="/manifesto"
-                className="inline-flex items-center justify-center px-7 py-3.5 border border-ink text-ink font-mono text-[12px] tracking-[0.18em] uppercase rounded-[4px] transition-colors duration-200 hover:bg-ink hover:text-paper-raised"
+                className="group relative inline-flex items-center justify-center px-8 py-3.5 font-mono text-[11px] tracking-[0.22em] uppercase overflow-hidden transition-colors duration-200 text-ink hover:text-paper-raised"
+                style={{ clipPath: "polygon(10px 0%, 100% 0%, calc(100% - 10px) 100%, 0% 100%)" }}
               >
-                Read the Thesis
+                {/* Inset border via box-shadow substitute using outline trick */}
+                <span aria-hidden="true" className="absolute inset-0 border border-ink transition-colors duration-200 group-hover:border-ink pointer-events-none" style={{ clipPath: "inherit" }} />
+                {/* Fill slide on hover */}
+                <span aria-hidden="true" className="absolute inset-0 bg-ink translate-x-[-101%] group-hover:translate-x-0 transition-transform duration-300 ease-out pointer-events-none" />
+                <span className="relative z-10">Read the Thesis</span>
               </a>
             </div>
           </div>
 
           {/* ──── Right column — Arc Reactor ──── */}
-          <div className="md:col-span-5 relative order-1 md:order-2 flex items-center justify-center md:justify-end">
-            <div className="relative w-full max-w-[440px] md:max-w-none flex justify-center md:justify-end">
-              <ArcReactor size={440} />
+          <div className="md:col-span-6 relative order-1 md:order-2 flex items-center justify-center md:justify-end">
+            <div className="relative w-full max-w-125 md:max-w-none flex justify-center md:justify-end">
+              <ArcReactor size={520} />
             </div>
           </div>
         </div>

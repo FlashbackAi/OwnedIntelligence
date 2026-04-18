@@ -970,27 +970,27 @@ const ArcReactor = forwardRef<SVGSVGElement, ArcReactorProps>(
           </g>
         </svg>
 
-        {/* HTML dimension labels (stay viewport-fixed, don't parallax) */}
+        {/* HTML dimension labels — percentage-based so they scale with the SVG */}
         <div
           aria-hidden="true"
           style={{ position: "absolute", inset: 0, pointerEvents: "none" }}
         >
           {[
             {
-              label: "R · 200",
-              pos: { top: 2, left: "50%", transform: "translateX(-50%)" },
+              label: "FL · v0.1",
+              pos: { top: "-5.5%", left: "50%", transform: "translateX(-50%)" },
             },
             {
-              label: "3 × 120°",
-              pos: { top: "50%", right: 2, transform: "translateY(-50%)" },
+              label: "MEM · ∞",
+              pos: { top: "50%", right: "-20%", transform: "translateY(-50%)" },
             },
             {
-              label: "Ø · 90",
-              pos: { bottom: 2, left: "50%", transform: "translateX(-50%)" },
+              label: "EST · 2024",
+              pos: { bottom: "-5.5%", left: "50%", transform: "translateX(-50%)" },
             },
             {
-              label: "FL-01",
-              pos: { top: "50%", left: 2, transform: "translateY(-50%)" },
+              label: "AI · YOURS",
+              pos: { top: "50%", left: "-20%", transform: "translateY(-50%)" },
             },
           ].map((l, i) => (
             <span
@@ -998,7 +998,7 @@ const ArcReactor = forwardRef<SVGSVGElement, ArcReactorProps>(
               className="ar-dim"
               style={{
                 position: "absolute",
-                fontSize: 9.5,
+                fontSize: "clamp(7px, 0.75vw, 9.5px)",
                 letterSpacing: "0.22em",
                 textTransform: "uppercase",
                 color: "var(--color-steel)",
