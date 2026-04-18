@@ -74,8 +74,8 @@ export default function EnterpriseProof() {
           y: 0,
           duration: 0.5,
           stagger: 0.1,
-        }, 0.22)
-      .to(tagline, { opacity: 1, y: 0, duration: 0.45 }, 0.62);
+        }, 0.22);
+    if (tagline) tl.to(tagline, { opacity: 1, y: 0, duration: 0.45 }, 0.62);
 
     boxes.forEach((box, i) => {
       const mono = box.querySelector<HTMLElement>(".ep-monogram");
