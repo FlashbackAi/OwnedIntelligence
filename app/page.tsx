@@ -5,6 +5,7 @@ import Thesis from "@/components/sections/Thesis";
 import Principles from "@/components/sections/Principles";
 import Products from "@/components/sections/Products";
 import Infrastructure from "@/components/sections/Infrastructure";
+import EnterpriseProof from "@/components/sections/EnterpriseProof";
 
 export default function Home() {
   return (
@@ -16,6 +17,7 @@ export default function Home() {
       <Principles />
       <Products />
       <Infrastructure />
+      <EnterpriseProof />
     </main>
   );
 }
