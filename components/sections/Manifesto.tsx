@@ -22,6 +22,8 @@ type Stanza = {
   label: string;
   body: ReactNode;
   colStart: 1 | 6;
+  calloutText: string;
+  calloutSide: "left" | "right";
 };
 
 const STANZAS: Stanza[] = [
@@ -37,6 +39,8 @@ const STANZAS: Stanza[] = [
       </>
     ),
     colStart: 1,
+    calloutText: "§02.01 · CLAIM",
+    calloutSide: "right",
   },
   {
     numeral: "II",
@@ -49,6 +53,8 @@ const STANZAS: Stanza[] = [
       </>
     ),
     colStart: 6,
+    calloutText: "§02.02 · PROBLEM",
+    calloutSide: "left",
   },
   {
     numeral: "III",
@@ -63,6 +69,8 @@ const STANZAS: Stanza[] = [
       </>
     ),
     colStart: 1,
+    calloutText: "§02.03 · ANSWER",
+    calloutSide: "right",
   },
 ];
 
@@ -94,9 +102,9 @@ export default function Manifesto() {
 
     if (prefersReducedMotion()) {
       const toShow = root.querySelectorAll<HTMLElement>(
-        ".manifesto-section-marker, .manifesto-stanza-eyebrow",
+        ".manifesto-section-marker, .manifesto-stanza-eyebrow, .manifesto-callout",
       );
-      gsap.set(toShow, { opacity: 1, y: 0 });
+      gsap.set(toShow, { opacity: 1, y: 0, x: 0 });
       const hairline = root.querySelector<HTMLElement>(".manifesto-hairline");
       if (hairline) {
         gsap.set(hairline, { transformOrigin: "top", scaleY: 1 });
@@ -136,6 +144,29 @@ export default function Manifesto() {
         y: 0,
         duration: 0.6,
         ease: "power3.out",
+        scrollTrigger: {
+          trigger: stanza,
+          start: "top bottom-=10%",
+          once: true,
+        },
+      });
+      if (t.scrollTrigger) triggers.push(t.scrollTrigger as ScrollTrigger);
+    });
+
+    // Per-stanza callouts — fire on stanza entry (same trigger as eyebrow)
+    const callouts = root.querySelectorAll<HTMLElement>(".manifesto-callout");
+    callouts.forEach((co) => {
+      const stanza = co.closest<HTMLElement>(".manifesto-stanza") ?? co;
+      gsap.set(co, { opacity: 0, x: 0 });
+      // Slight inward slide based on which side the callout sits on
+      const fromX = co.classList.contains("flex-row-reverse") ? 6 : -6;
+      gsap.set(co, { x: fromX });
+      const t = gsap.to(co, {
+        opacity: 1,
+        x: 0,
+        duration: 0.6,
+        ease: "power3.out",
+        delay: 0.1,
         scrollTrigger: {
           trigger: stanza,
           start: "top bottom-=10%",
@@ -189,8 +220,11 @@ export default function Manifesto() {
       />
 
       <div className="relative mx-auto max-w-[1280px] px-6 md:px-14 pt-12 pb-24">
-        <div className="manifesto-section-marker">
-          <Eyebrow numeral="§ 02" label="MANIFESTO" />
+        <div className="manifesto-section-marker flex items-center gap-4">
+          <span className="block h-px w-14 bg-ink/50" aria-hidden="true" />
+          <span className="font-mono text-[13px] tracking-[0.32em] uppercase text-ink">
+            § 02 · MANIFESTO
+          </span>
         </div>
 
         <div
@@ -203,11 +237,24 @@ export default function Manifesto() {
           {STANZAS.map((s, i) => (
             <div
               key={s.numeral}
-              className={`manifesto-stanza col-span-1 md:col-span-7 ${
+              className={`manifesto-stanza relative col-span-1 md:col-span-7 ${
                 s.colStart === 1 ? "md:col-start-1" : "md:col-start-6"
               }`}
               style={{ marginTop: i === 0 ? "18vh" : "22vh" }}
             >
+              <span
+                aria-hidden="true"
+                className={`manifesto-callout hidden md:flex items-center gap-2 absolute top-1 ${
+                  s.calloutSide === "right"
+                    ? "left-full ml-8 flex-row"
+                    : "right-full mr-8 flex-row-reverse"
+                }`}
+              >
+                <span className="block h-px w-6 bg-ink/40" aria-hidden="true" />
+                <span className="font-mono text-[9px] tracking-[0.28em] uppercase text-steel whitespace-nowrap">
+                  {s.calloutText}
+                </span>
+              </span>
               <Eyebrow
                 numeral={s.numeral}
                 label={s.label}
