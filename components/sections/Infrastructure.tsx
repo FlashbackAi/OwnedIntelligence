@@ -321,7 +321,7 @@ export default function Infrastructure() {
       aria-labelledby="infra-heading"
       className="relative w-full bg-paper"
     >
-      <div className="relative mx-auto max-w-[1280px] px-6 md:px-14 pt-16 md:pt-24 pb-40 md:pb-36">
+      <div className="relative mx-auto max-w-[1280px] px-6 md:px-14 pt-16 md:pt-24 pb-105 md:pb-100">
         {/* Section marker */}
         <div className="infra-section-marker flex items-center gap-4">
           <span className="block h-px w-14 bg-ink/50" aria-hidden="true" />
