@@ -9,7 +9,13 @@
  */
 
 import type { ReactNode } from "react";
+import { useLayoutEffect, useRef } from "react";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { prefersReducedMotion } from "@/lib/motion";
 import ScrollReveal from "../ui/ScrollReveal";
+
+gsap.registerPlugin(ScrollTrigger);
 
 type Stanza = {
   numeral: string;
@@ -80,8 +86,94 @@ function Eyebrow({
 }
 
 export default function Manifesto() {
+  const rootRef = useRef<HTMLElement>(null);
+
+  useLayoutEffect(() => {
+    const root = rootRef.current;
+    if (!root) return;
+
+    if (prefersReducedMotion()) {
+      const toShow = root.querySelectorAll<HTMLElement>(
+        ".manifesto-section-marker, .manifesto-stanza-eyebrow",
+      );
+      gsap.set(toShow, { opacity: 1, y: 0 });
+      const hairline = root.querySelector<HTMLElement>(".manifesto-hairline");
+      if (hairline) {
+        gsap.set(hairline, { transformOrigin: "top", scaleY: 1 });
+      }
+      return;
+    }
+
+    const triggers: ScrollTrigger[] = [];
+
+    // Section marker — fires once on entry
+    const marker = root.querySelector<HTMLElement>(".manifesto-section-marker");
+    if (marker) {
+      gsap.set(marker, { opacity: 0, y: 8 });
+      const t = gsap.to(marker, {
+        opacity: 1,
+        y: 0,
+        duration: 0.5,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: root,
+          start: "top 85%",
+          once: true,
+        },
+      });
+      if (t.scrollTrigger) triggers.push(t.scrollTrigger as ScrollTrigger);
+    }
+
+    // Per-stanza eyebrows — fire once, slightly before each stanza's reveal
+    const eyebrows = root.querySelectorAll<HTMLElement>(
+      ".manifesto-stanza-eyebrow",
+    );
+    eyebrows.forEach((eb) => {
+      const stanza = eb.closest<HTMLElement>(".manifesto-stanza") ?? eb;
+      gsap.set(eb, { opacity: 0, y: 8 });
+      const t = gsap.to(eb, {
+        opacity: 1,
+        y: 0,
+        duration: 0.6,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: stanza,
+          start: "top bottom-=10%",
+          once: true,
+        },
+      });
+      if (t.scrollTrigger) triggers.push(t.scrollTrigger as ScrollTrigger);
+    });
+
+    // Vertical hairline — scrubbed scaleY draw
+    const hairline = root.querySelector<HTMLElement>(".manifesto-hairline");
+    if (hairline) {
+      gsap.set(hairline, { transformOrigin: "top", scaleY: 0 });
+      const t = gsap.fromTo(
+        hairline,
+        { scaleY: 0 },
+        {
+          scaleY: 1,
+          ease: "none",
+          scrollTrigger: {
+            trigger: root,
+            start: "top bottom",
+            end: "bottom bottom",
+            scrub: true,
+          },
+        },
+      );
+      if (t.scrollTrigger) triggers.push(t.scrollTrigger as ScrollTrigger);
+    }
+
+    return () => {
+      triggers.forEach((t) => t.kill());
+    };
+  }, []);
+
   return (
     <section
+      ref={rootRef}
       id="manifesto"
       aria-labelledby="manifesto-heading"
       className="relative w-full bg-paper overflow-hidden"
