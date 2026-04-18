@@ -9,6 +9,7 @@
  */
 
 import type { ReactNode } from "react";
+import ScrollReveal from "../ui/ScrollReveal";
 
 type Stanza = {
   numeral: string;
@@ -120,9 +121,16 @@ export default function Manifesto() {
                 label={s.label}
                 className="manifesto-stanza-eyebrow mb-6"
               />
-              <blockquote className="font-display text-[clamp(1.6rem,3.4vw,2.6rem)] leading-[1.35] tracking-[-0.01em] text-ink">
+              <ScrollReveal
+                baseOpacity={0.12}
+                baseRotation={2}
+                blurStrength={3}
+                enableBlur
+                containerClassName="my-0"
+                textClassName="font-display text-[clamp(1.6rem,3.4vw,2.6rem)] leading-[1.35] tracking-[-0.01em] text-ink"
+              >
                 {s.body}
-              </blockquote>
+              </ScrollReveal>
             </div>
           ))}
         </div>
