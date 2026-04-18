@@ -3,6 +3,8 @@ import Hero from "@/components/sections/Hero";
 import Manifesto from "@/components/sections/Manifesto";
 import Thesis from "@/components/sections/Thesis";
 import Principles from "@/components/sections/Principles";
+import Products from "@/components/sections/Products";
+import Infrastructure from "@/components/sections/Infrastructure";
 
 export default function Home() {
   return (
@@ -12,6 +14,8 @@ export default function Home() {
       <Manifesto />
       <Thesis />
       <Principles />
+      <Products />
+      <Infrastructure />
     </main>
   );
 }

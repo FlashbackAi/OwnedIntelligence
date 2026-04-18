@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 860" preserveAspectRatio="xMidYMid slice">
+  <rect width="420" height="860" fill="#EEEEEA"/>
+  <g stroke="#D8D5CE" stroke-width="1">
+    <line x1="0" y1="0" x2="420" y2="860"/>
+    <line x1="420" y1="0" x2="0" y2="860"/>
+  </g>
+  <g fill="#5A6470" font-family="ui-monospace, Menlo, monospace" font-size="14" letter-spacing="3">
+    <text x="210" y="420" text-anchor="middle">IMG // FLASHBACK-AI</text>
+    <text x="210" y="450" text-anchor="middle" font-size="11" fill="#8A8A83">420 × 860 placeholder</text>
+  </g>
+</svg>

@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice">
+  <rect width="400" height="300" fill="#EEEEEA"/>
+  <g stroke="#D8D5CE" stroke-width="1">
+    <line x1="0" y1="0" x2="400" y2="300"/>
+    <line x1="400" y1="0" x2="0" y2="300"/>
+  </g>
+  <g fill="#5A6470" font-family="ui-monospace, Menlo, monospace" font-size="13" letter-spacing="3">
+    <text x="200" y="150" text-anchor="middle">IMG // CAR-AI</text>
+    <text x="200" y="172" text-anchor="middle" font-size="10" fill="#8A8A83">400 × 300 placeholder</text>
+  </g>
+</svg>
