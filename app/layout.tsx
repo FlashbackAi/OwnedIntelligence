@@ -17,6 +17,13 @@ const glitchGoblin = localFont({
   weight: "400",
 });
 
+const hydrogen = localFont({
+  src: "../public/fonts/hydrogen.ttf",
+  variable: "--font-hydrogen",
+  display: "swap",
+  weight: "400",
+});
+
 const inter = Inter({
   variable: "--font-inter",
   subsets: ["latin"],
@@ -52,7 +59,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${nevera.variable} ${glitchGoblin.variable} ${inter.variable} ${jetbrainsMono.variable} h-full antialiased`}
+      className={`${nevera.variable} ${glitchGoblin.variable} ${hydrogen.variable} ${inter.variable} ${jetbrainsMono.variable} h-full antialiased`}
     >
       <body className="min-h-full bg-paper text-ink font-sans">
         {children}

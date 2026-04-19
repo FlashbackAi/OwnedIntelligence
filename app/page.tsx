@@ -6,6 +6,8 @@ import Principles from "@/components/sections/Principles";
 import Products from "@/components/sections/Products";
 import Infrastructure from "@/components/sections/Infrastructure";
 import EnterpriseProof from "@/components/sections/EnterpriseProof";
+import ClosingManifesto from "@/components/sections/ClosingManifesto";
+import Footer from "@/components/sections/Footer";
 
 export default function Home() {
   return (
@@ -18,6 +20,8 @@ export default function Home() {
       <Products />
       <Infrastructure />
       <EnterpriseProof />
+      <ClosingManifesto />
+      <Footer />
     </main>
   );
 }
