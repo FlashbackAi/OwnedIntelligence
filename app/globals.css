@@ -64,6 +64,7 @@ html {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
+  overflow-x: clip;
 }
 
 body {
@@ -72,6 +73,7 @@ body {
   font-family: var(--font-sans);
   font-size: 16px;
   line-height: 1.55;
+  overflow-x: clip;
 }
 
 ::selection {
@@ -102,6 +104,26 @@ body {
 
 /* Arc-reactor SVG — boot initial state is set via JS (utils.set + createDrawable),
    so nothing here. The reactor SVG self-contains its pre-animation state. */
+
+/* HeroCinematic — register ink/steel as animatable colors so the reactor's
+   strokes can interpolate from light (on black intro) back to dark (on paper). */
+@property --color-ink {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: #0b0d10;
+}
+@property --color-steel {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: #5a6470;
+}
+.heroc-reactor-scale {
+  transition: --color-ink 650ms ease, --color-steel 650ms ease;
+}
+.heroc-reactor-scale[data-phase="black"] {
+  --color-ink: #e8e8e4;
+  --color-steel: #9aa3ad;
+}
 
 /* ─────────────────────────────────────────────
    Prefers-reduced-motion: animations snap to final state.

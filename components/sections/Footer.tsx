@@ -112,7 +112,7 @@ export default function Footer() {
           {/* Bottom row */}
           <div className="mt-12 pt-5 border-t border-hairline flex flex-col sm:flex-row gap-2 sm:gap-0 justify-between items-center">
             <p className="font-mono text-[10px] tracking-[0.15em] text-steel">
-              © 2025 Flashback Labs
+              © 2026 Flashback Labs
             </p>
             <a
               href="mailto:contact@flashbacklabs.com"

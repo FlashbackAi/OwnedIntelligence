@@ -1,5 +1,5 @@
 import Nav from "@/components/ui/Nav";
-import Hero from "@/components/sections/Hero";
+import Hero from "@/components/sections/HeroCinematic";
 import Manifesto from "@/components/sections/Manifesto";
 import Thesis from "@/components/sections/Thesis";
 import Principles from "@/components/sections/Principles";
