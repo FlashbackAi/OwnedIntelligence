@@ -73,6 +73,8 @@ Strikethrough / overwrite treatment on *obsolete* → *more capable*. Then a qui
 
 <img width="1440" height="900" alt="closing" src="https://github.com/user-attachments/assets/a70e5a7c-e039-4dfa-8bc3-789cc34ffd4f" />
 
+
+
 <img width="1440" height="900" alt="footer" src="https://github.com/user-attachments/assets/103c6b50-89ac-4f0b-ab42-33294aa53d88" />
 
 
