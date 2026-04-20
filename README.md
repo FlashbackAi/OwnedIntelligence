@@ -11,7 +11,8 @@
 [![TypeScript](https://img.shields.io/badge/TypeScript-5-3178C6?style=flat-square&logo=typescript)](https://www.typescriptlang.org)
 [![Tailwind](https://img.shields.io/badge/Tailwind-4-38BDF8?style=flat-square&logo=tailwindcss)](https://tailwindcss.com)
 
-![Hero](docs/screenshots/hero.png)
+<img width="1440" height="900" alt="hero" src="https://github.com/user-attachments/assets/4538ea9b-e94a-4d9d-86f1-db06c8c21359" />
+
 
 </div>
 
