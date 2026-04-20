@@ -1,6 +1,6 @@
 <div align="center">
 
-# FLASHBACK · LABS
+# Flashbacklabs
 
 **Your personal Jarvis - owned by you, remembering your life, working for you alone.**
 
