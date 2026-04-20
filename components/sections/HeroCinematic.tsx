@@ -107,7 +107,7 @@ export default function HeroCinematic() {
         scaffold,
         {
           opacity: [0, 1],
-          duration: 700,
+          duration: 2000, // change this to 700 if needed
           ease: "outQuart",
           delay: stagger(50),
         },
@@ -285,7 +285,7 @@ export default function HeroCinematic() {
         aria-hidden="true"
         className="absolute inset-0 z-10 flex items-center justify-center pointer-events-none will-change-transform"
       >
-        <div className="scale-75 md:scale-100" style={{ transformOrigin: "center center" }}>
+        <div className="scale-65 md:scale-120" style={{ transformOrigin: "center center" }}>
           <div
             className="heroc-reactor-scale"
             data-phase="black"
