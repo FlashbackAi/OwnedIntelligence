@@ -2,9 +2,9 @@
 
 # FLASHBACK · LABS
 
-**Your personal Jarvis — owned by you, remembering your life, working for you alone.**
+**Your personal Jarvis - owned by you, remembering your life, working for you alone.**
 
-*An editorial, cinematic marketing site for Flashback Labs — built with Next.js 16, React 19, GSAP, and Three.js.*
+*An editorial, cinematic marketing site for Flashback Labs - built with Next.js 16, React 19, GSAP, and Three.js.*
 
 [![Next.js](https://img.shields.io/badge/Next.js-16.2-000?style=flat-square&logo=next.js)](https://nextjs.org)
 [![React](https://img.shields.io/badge/React-19.2-149ECA?style=flat-square&logo=react)](https://react.dev)
@@ -19,53 +19,62 @@
 
 ## § 00 · What this is
 
-A single long-form landing page designed like a printed manifesto — ten sections, each with its own typographic system, hand-tuned scroll choreography, and a consistent blueprint/engineering aesthetic. Every section is a beat; every beat earns its scroll.
+A single long-form landing page designed like a printed manifesto - ten sections, each with its own typographic system, hand-tuned scroll choreography, and a consistent blueprint/engineering aesthetic. Every section is a beat; every beat earns its scroll.
 
 ## § 01 · The sections
 
-### Hero — *"In a world where AI does everything, what's left for you."*
+### Hero - *"In a world where AI does everything, what's left for you."*
 
 An editorial headline with an SVG arc-reactor breathing behind it, angled CTAs, and a dotted-grid canvas. Sets the tone: confident, human, counter-cultural.
 
-![Hero](docs/screenshots/hero.png)
+<img width="1440" height="900" alt="hero" src="https://github.com/user-attachments/assets/422927ca-8abb-46d5-adb5-3086330187d5" />
 
-### § 02 · Manifesto — The problem
+
+### § 02 · Manifesto - The problem
 
 ScrollReveal + GSAP-driven prose with margin callouts and scrubbed hairlines. Makes the case: attention was the product; memory will be next.
 
-![Manifesto](docs/screenshots/manifesto.png)
+<img width="1440" height="900" alt="manifesto" src="https://github.com/user-attachments/assets/c4418ebd-be19-4210-b57a-b3d7d376d9ee" />
 
-### § 03 · Thesis — The amplification zone
 
-A blueprint plate marking the narrow band between *assist* and *automate* — the zone where AI makes you more, not less. Scrubbed marker, reveal-on-rest detail callout.
+### § 03 · Thesis - The amplification zone
 
-![Thesis](docs/screenshots/thesis.png)
+A blueprint plate marking the narrow band between *assist* and *automate* - the zone where AI makes you more, not less. Scrubbed marker, reveal-on-rest detail callout.
 
-### § 04 · Principles — Four rules we won't break
+<img width="1440" height="900" alt="thesis" src="https://github.com/user-attachments/assets/d140653a-4861-45ca-ba8c-e83719344c60" />
+
+
+### § 04 · Principles - Four rules we won't break
 
 Four squircle bubbles with subtle tinted fills and hover-to-unpack descriptions. Nonautonomous · Private · User-owned · Auditable.
 
-![Principles](docs/screenshots/principles.png)
-![Principles — all four](docs/screenshots/principles2.png)
+<img width="1440" height="900" alt="principles" src="https://github.com/user-attachments/assets/d517e6a4-9b04-4769-8f8d-4fcf6c07c917" />
 
-### § 05 · Products — Four surfaces, one Jarvis
+<img width="1440" height="900" alt="principles2" src="https://github.com/user-attachments/assets/6e6601ef-3430-495f-8529-4139c8824a76" />
+
+
+### § 05 · Products - Four surfaces, one Jarvis
 
 Blueprint flow stations, plate-row sub-product index, 55M count-up. Flashback AI flagship plus Home, Car, and a fourth preview surface.
 
-![Products](docs/screenshots/products.png)
+<img width="1440" height="900" alt="products" src="https://github.com/user-attachments/assets/d803f9e7-2924-455d-8624-c669da2cdc94" />
 
-### § 06 · Infrastructure — From data to proof
+
+### § 06 · Infrastructure - From data to proof
 
 An isometric step-pyramid tower (INFRA → DATA → INTEL → VERIFY) with hover-reveal layer details. Hand-drawn blueprint geometry built in SVG.
 
-![Infrastructure](docs/screenshots/infrastructure.png)
+<img width="1440" height="900" alt="infrastructure" src="https://github.com/user-attachments/assets/c27743ab-349f-4463-a0a8-4beed59532c9" />
+
 
 ### § 10 · Closing manifesto + Footer
 
 Strikethrough / overwrite treatment on *obsolete* → *more capable*. Then a quiet footer with pixel-art wordmark, sitemap, and contact.
 
-![Closing](docs/screenshots/closing.png)
-![Footer](docs/screenshots/footer.png)
+<img width="1440" height="900" alt="closing" src="https://github.com/user-attachments/assets/a70e5a7c-e039-4dfa-8bc3-789cc34ffd4f" />
+
+<img width="1440" height="900" alt="footer" src="https://github.com/user-attachments/assets/103c6b50-89ac-4f0b-ab42-33294aa53d88" />
+
 
 ---
 
@@ -79,7 +88,7 @@ Strikethrough / overwrite treatment on *obsolete* → *more capable*. Then a qui
 | 3D / SVG | **three.js** + **@react-three/fiber / drei** · hand-authored SVG plates |
 | Language | **TypeScript 5** strict |
 
-> ⚠️ This is **not** the Next.js you know. v16 has breaking changes in routing, fetching, and caching. See `node_modules/next/dist/docs/` before writing against it — and heed deprecation notices.
+> ⚠️ This is **not** the Next.js you know. v16 has breaking changes in routing, fetching, and caching. See `node_modules/next/dist/docs/` before writing against it - and heed deprecation notices.
 
 ## § 08 · Run it
 
@@ -93,7 +102,7 @@ npm run lint
 ## § 09 · Layout
 
 ```
-app/                     # Next.js App Router — page.tsx composes all sections
+app/                     # Next.js App Router - page.tsx composes all sections
 components/
   sections/              # One file per section (Hero, Manifesto, Thesis, …)
   svg/                   # Hand-authored blueprint plates + ArcReactor
@@ -114,7 +123,7 @@ docs/screenshots/        # README imagery (captured via Playwright MCP)
 
 <div align="center">
 
-**— Flashback Labs —**
+**- Flashback Labs -**
 [contact@flashbacklabs.com](mailto:contact@flashbacklabs.com)
 
 </div>
