@@ -17,7 +17,7 @@ import ArcReactor from "../svg/ArcReactor";
 const HEADLINE_LINES = [
   ["In", "a", "world", "where", "AI", "does", "everything,"],
   ["what's", "left"],
-  ["for", "you."],
+  ["for", "you ?"],
 ];
 
 export default function HeroCinematic() {
