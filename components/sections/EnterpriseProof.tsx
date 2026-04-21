@@ -29,7 +29,7 @@ const CLIENTS: Client[] = [
   { id: "stevie",       monogram: "SA",  name: "Stevie Awards" },
   { id: "imageshield",  monogram: "IS",  name: "ImageShield"   },
   { id: "reqsy",        monogram: "RQ",  name: "Reqsy"         },
-  { id: "ink",          monogram: "INK", name: "Ink"           },
+  { id: "CI",          monogram: "CI", name: "Caterer Inc"           },
 ];
 
 export default function EnterpriseProof() {
@@ -110,7 +110,7 @@ export default function EnterpriseProof() {
         </p>
 
         <h2 id="enterprise-heading" className="ep-headline font-mono text-xl md:text-2xl tracking-widest text-[var(--color-ink)] uppercase mb-12">
-          Paying Clients · No External Funding
+          Partners supporting our boostrapped journey
         </h2>
 
         <div className="border-t border-b border-[var(--color-hairline)] bg-[var(--color-paper-sunk)] py-10 mb-10">

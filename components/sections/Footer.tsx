@@ -24,8 +24,8 @@ export default function Footer() {
           <span
             className="block text-ink leading-none whitespace-nowrap text-center md:text-left"
             style={{
-              fontFamily: "var(--font-hydrogen), sans-serif",
-              fontSize: "clamp(2rem, 14cqw, 9rem)",
+              fontFamily: "var(--font-nevera), sans-serif",
+              fontSize: "clamp(1rem, 10cqw, 5rem)",
             }}
           >
             flashbacklabs

@@ -1,0 +1,383 @@
+- generic [active] [ref=e1]:
+  - main [ref=e2]:
+    - navigation "Main navigation":
+      - generic "Flashback Labs" [ref=e3]:
+        - generic [ref=e5]:
+          - generic [ref=e6]: flashback
+          - generic [ref=e8]: labs
+      - button "Toggle navigation" [ref=e9] [cursor=pointer]
+    - region "Flashback Labs" [ref=e12]:
+      - generic [ref=e14]:
+        - generic [ref=e15]:
+          - generic [ref=e18]: Flashback Labs
+          - heading "In a world where AI does everything, what's left for you." [level=1] [ref=e19]:
+            - generic [ref=e20]:
+              - generic [ref=e21]: In
+              - generic [ref=e22]: a
+              - generic [ref=e23]: world
+              - generic [ref=e24]: where
+              - generic [ref=e25]: AI
+              - generic [ref=e26]: does
+              - generic [ref=e27]: everything,
+            - generic [ref=e28]:
+              - generic [ref=e29]: what's
+              - generic [ref=e30]: left
+            - generic [ref=e31]:
+              - generic [ref=e32]: for
+              - generic [ref=e34]: you.
+          - paragraph [ref=e36]: Building the personal AI — owned by you, remembering your life, working for you alone.
+          - generic [ref=e37]:
+            - link "Meet Flashback AI →" [ref=e38] [cursor=pointer]:
+              - /url: https://flashbackai.com
+              - generic [ref=e39]: Meet Flashback AI →
+            - link "Read the Thesis" [ref=e40] [cursor=pointer]:
+              - /url: /manifesto
+              - generic [ref=e41]: Read the Thesis
+        - generic [ref=e44]:
+          - img [ref=e45]:
+            - generic [ref=e205]: FLASHBACK · CORE · SERIES·F-01 · PERSONAL AI · OWNED BY YOU ·
+          - generic:
+            - generic: FL · v0.1
+            - generic: MEM · ∞
+            - generic: EST · 2024
+            - generic: AI · YOURS
+    - region "Manifesto" [ref=e217]:
+      - heading "Manifesto" [level=2] [ref=e218]
+      - generic [ref=e219]:
+        - generic [ref=e222]: § 02 · MANIFESTO
+        - generic [ref=e223]:
+          - generic [ref=e224]:
+            - generic [ref=e227]: §02.01 · CLAIM
+            - generic [ref=e230]: I · THE CLAIM
+            - heading "The AI they're building wants your life . Your photos. Your messages. Your habits. Your attention. All of it, harvested to be sold back to you." [level=2] [ref=e231]:
+              - paragraph [ref=e232]:
+                - generic [ref=e233]: The
+                - generic [ref=e234]: AI
+                - generic [ref=e235]: they're
+                - generic [ref=e236]: building
+                - generic [ref=e237]: wants
+                - generic [ref=e238]:
+                  - generic [ref=e239]: your
+                  - generic [ref=e240]: life
+                - generic [ref=e241]: .
+                - generic [ref=e242]: Your
+                - generic [ref=e243]: photos.
+                - generic [ref=e244]: Your
+                - generic [ref=e245]: messages.
+                - generic [ref=e246]: Your
+                - generic [ref=e247]: habits.
+                - generic [ref=e248]: Your
+                - generic [ref=e249]: attention.
+                - generic [ref=e250]: All
+                - generic [ref=e251]: of
+                - generic [ref=e252]: it,
+                - generic [ref=e253]: harvested
+                - generic [ref=e254]: to
+                - generic [ref=e255]: be
+                - generic [ref=e256]: sold
+                - generic [ref=e257]: back
+                - generic [ref=e258]: to
+                - generic [ref=e259]: you.
+          - generic [ref=e260]:
+            - generic [ref=e263]: §02.02 · PROBLEM
+            - generic [ref=e266]: II · THE PROBLEM
+            - heading "Memory is the raw material of agency . When someone else owns the record of who you are, they own the terms of what you can become." [level=2] [ref=e267]:
+              - paragraph [ref=e268]:
+                - generic [ref=e269]: Memory
+                - generic [ref=e270]: is
+                - generic [ref=e271]: the
+                - generic [ref=e272]: raw
+                - generic [ref=e273]: material
+                - generic [ref=e274]: of
+                - generic [ref=e276]: agency
+                - generic [ref=e277]: .
+                - generic [ref=e278]: When
+                - generic [ref=e279]: someone
+                - generic [ref=e280]: else
+                - generic [ref=e281]: owns
+                - generic [ref=e282]: the
+                - generic [ref=e283]: record
+                - generic [ref=e284]: of
+                - generic [ref=e285]: who
+                - generic [ref=e286]: you
+                - generic [ref=e287]: are,
+                - generic [ref=e288]: they
+                - generic [ref=e289]: own
+                - generic [ref=e290]: the
+                - generic [ref=e291]: terms
+                - generic [ref=e292]: of
+                - generic [ref=e293]: what
+                - generic [ref=e294]: you
+                - generic [ref=e295]: can
+                - generic [ref=e296]: become.
+          - generic [ref=e297]:
+            - generic [ref=e300]: §02.03 · ANSWER
+            - generic [ref=e303]: III · THE ANSWER
+            - heading "A personal AI that runs entirely on your device . No company server holds your memory — it lives encrypted on decentralized storage, anchored on-chain, owned by you. It answers to you alone, and leaves when you ask it to." [level=2] [ref=e304]:
+              - paragraph [ref=e305]:
+                - generic [ref=e306]: A
+                - generic [ref=e307]: personal
+                - generic [ref=e308]: AI
+                - generic [ref=e309]: that
+                - generic [ref=e310]: runs
+                - generic [ref=e311]: entirely
+                - generic [ref=e312]: "on"
+                - generic [ref=e313]:
+                  - generic [ref=e314]: your
+                  - generic [ref=e315]: device
+                - generic [ref=e316]: .
+                - generic [ref=e317]: "No"
+                - generic [ref=e318]: company
+                - generic [ref=e319]: server
+                - generic [ref=e320]: holds
+                - generic [ref=e321]: your
+                - generic [ref=e322]: memory
+                - generic [ref=e323]: —
+                - generic [ref=e324]: it
+                - generic [ref=e325]: lives
+                - generic [ref=e326]: encrypted
+                - generic [ref=e327]: "on"
+                - generic [ref=e328]: decentralized
+                - generic [ref=e329]: storage,
+                - generic [ref=e330]: anchored
+                - generic [ref=e331]: on-chain,
+                - generic [ref=e332]: owned
+                - generic [ref=e333]: by
+                - generic [ref=e334]: you.
+                - generic [ref=e335]: It
+                - generic [ref=e336]: answers
+                - generic [ref=e337]: to
+                - generic [ref=e338]: you
+                - generic [ref=e339]: alone,
+                - generic [ref=e340]: and
+                - generic [ref=e341]: leaves
+                - generic [ref=e342]: when
+                - generic [ref=e343]: you
+                - generic [ref=e344]: ask
+                - generic [ref=e345]: it
+                - generic [ref=e346]: to.
+    - region "The Amplification Zone" [ref=e347]:
+      - heading "The Amplification Zone" [level=2] [ref=e348]
+      - generic [ref=e349]:
+        - generic [ref=e352]: § 03 · POSITION
+        - generic [ref=e353]:
+          - generic [ref=e354]: Amplification Zone // a position, not a promise
+          - heading "There is a zone where AI makes you more. We live in it." [level=3] [ref=e355]:
+            - generic [ref=e356]: There is a zone where AI makes you more.
+            - generic [ref=e357]: We live in it.
+        - generic [ref=e359]:
+          - generic [ref=e360]:
+            - generic [ref=e363]: human agency — max
+            - generic [ref=e365]: ai autonomy — max
+          - generic [ref=e367]:
+            - generic [ref=e372]:
+              - generic [ref=e373]: ASSIST
+              - generic [ref=e374]: tools that do a task for you
+            - generic [ref=e375]:
+              - generic [ref=e376]: AMPLIFY
+              - generic [ref=e377]: tools that make you better at a task
+            - generic [ref=e378]:
+              - generic [ref=e379]: AUTOMATE
+              - generic [ref=e380]: tools that do the task without you
+            - generic [ref=e381]:
+              - generic [ref=e382]: REPLACE
+              - generic [ref=e383]: tools that don't need you at all
+          - generic [ref=e390]:
+            - generic [ref=e393]: 0.0 · ASSIST
+            - generic [ref=e395]: REPLACE · 1.0
+          - generic [ref=e399]: ai autonomy — 0.0 → 1.0
+          - generic [ref=e401]:
+            - generic [ref=e402]:
+              - generic [ref=e403]: DETAIL A
+              - generic [ref=e406]: FLASHBACK
+            - list [ref=e407]:
+              - listitem [ref=e408]:
+                - generic [ref=e409]: "01"
+                - generic [ref=e410]: private by default
+              - listitem [ref=e411]:
+                - generic [ref=e412]: "02"
+                - generic [ref=e413]: on-device
+              - listitem [ref=e414]:
+                - generic [ref=e415]: "03"
+                - generic [ref=e416]: nonautonomous — you stay in control
+          - generic [ref=e419]: 30% · AMPLIFY
+          - generic [ref=e421]:
+            - generic [ref=e422]: drawing
+            - generic [ref=e423]: 03 · amplification zone
+            - generic [ref=e424]: rev
+            - generic [ref=e425]: 04.2026 · 1.0
+            - generic [ref=e426]: by
+            - generic [ref=e427]: flashback labs · thesis
+    - region "Four rules we won’t break." [ref=e428]:
+      - generic [ref=e429]:
+        - generic [ref=e432]: § 04 · PRINCIPLES
+        - generic [ref=e433]:
+          - generic [ref=e434]: Design principles // 01–04 // rules we won’t break
+          - heading "Four rules we won’t break." [level=2] [ref=e435]
+          - paragraph [ref=e436]: The constants we design every product around. Hover a bubble to see it unpack.
+        - generic [ref=e437]:
+          - article "Nonautonomous" [ref=e438]:
+            - generic [ref=e439]:
+              - img [ref=e440]
+              - generic [ref=e442]:
+                - generic [ref=e443]: "01"
+                - heading "Nonautonomous" [level=3] [ref=e444]
+                - paragraph [ref=e445]: AI that asks, not one that acts without you. Every decision stays yours.
+          - article "Private by Default" [ref=e446]:
+            - generic [ref=e447]:
+              - img [ref=e448]
+              - generic [ref=e450]:
+                - generic [ref=e451]: "02"
+                - heading "Private by Default" [level=3] [ref=e452]
+                - paragraph [ref=e453]: Your data lives on your devices, encrypted. We never see it, never sell it.
+          - article "User-Owned" [ref=e454]:
+            - generic [ref=e455]:
+              - img [ref=e456]
+              - generic [ref=e458]:
+                - generic [ref=e459]: "03"
+                - heading "User-Owned" [level=3] [ref=e460]
+                - paragraph [ref=e461]: Keys, models, logs — all yours. No rented intelligence, no leased memory.
+          - article "Auditable" [ref=e462]:
+            - generic [ref=e463]:
+              - img [ref=e464]
+              - generic [ref=e466]:
+                - generic [ref=e467]: "04"
+                - heading "Auditable" [level=3] [ref=e468]
+                - paragraph [ref=e469]: Every action traceable. Nothing happens off-record. Open by construction.
+    - region "Four surfaces. One Jarvis." [ref=e470]:
+      - generic [ref=e471]:
+        - generic [ref=e474]: § 05 · PRODUCTS
+        - generic [ref=e475]:
+          - generic [ref=e476]: Products // 01–04 // one Jarvis, four surfaces
+          - heading "Four surfaces. One Jarvis." [level=2] [ref=e477]:
+            - generic [ref=e478]: Four surfaces.
+            - generic [ref=e479]: One Jarvis.
+        - generic [ref=e480]:
+          - article [ref=e481]:
+            - generic [ref=e482]:
+              - generic [ref=e487]: LIVE · iOS / Android
+              - generic [ref=e488]: 01 · flagship
+            - generic [ref=e489]:
+              - img "Flashback AI product placeholder" [ref=e492]
+              - generic [ref=e493]:
+                - heading "Flashback AI" [level=3] [ref=e494]
+                - paragraph [ref=e495]: Personal Jarvis in your pocket. Voice-first, memory-forward, encrypted end-to-end, and built around the person it serves — not the cloud it lives on.
+                - list [ref=e496]:
+                  - listitem [ref=e497]:
+                    - generic [ref=e499]
+                  - listitem [ref=e501]:
+                    - generic [ref=e503]
+                  - listitem [ref=e505]:
+                    - generic [ref=e507]
+            - generic [ref=e509]:
+              - generic [ref=e512]: flow · 04 · document → privacy
+              - generic [ref=e514]:
+                - generic [ref=e515]:
+                  - generic [ref=e516]:
+                    - generic [ref=e517]
+                    - img [ref=e527]
+                  - generic [ref=e530]:
+                    - generic [ref=e531]
+                    - img [ref=e542]
+                  - generic [ref=e545]:
+                    - generic [ref=e546]
+                    - img [ref=e558]
+                  - generic [ref=e562]:
+                    - generic [ref=e565]: "04"
+                    - img [ref=e567]
+                    - generic [ref=e571]: Privacy
+                    - generic [ref=e572]: seal · encrypt · keep
+                - generic [ref=e579]:
+                  - generic [ref=e580]: input
+                  - generic [ref=e581]: end-to-end · private
+                  - generic [ref=e584]: output
+              - generic [ref=e585]:
+                - generic [ref=e586]:
+                  - generic [ref=e587]: memories handled · live
+                  - generic [ref=e588]: 55,000,000
+                - generic [ref=e589]: across paying enterprise deployments · 2026
+          - generic [ref=e591]:
+            - generic [ref=e593]: index · 02 → 04
+            - article [ref=e595]:
+              - generic [ref=e596]:
+                - generic [ref=e597]:
+                  - generic [ref=e598]: "02"
+                  - generic [ref=e599]: SOON
+                  - generic [ref=e601]: · Q4 · 2026
+                - generic [ref=e602]:
+                  - img "Home Companion product placeholder" [ref=e604]
+                  - generic [ref=e605]: preview · home
+              - heading "Home Companion" [level=3] [ref=e606]
+              - paragraph [ref=e607]: Ambient Jarvis for the household — voice-first, on-device.
+              - generic [ref=e610]: view spec
+            - article [ref=e612]:
+              - generic [ref=e613]:
+                - generic [ref=e614]:
+                  - generic [ref=e615]: "03"
+                  - generic [ref=e616]: SOON
+                  - generic [ref=e618]: · Q1 · 2027
+                - generic [ref=e619]:
+                  - img "Car AI product placeholder" [ref=e621]
+                  - generic [ref=e622]: preview · car
+              - heading "Car AI" [level=3] [ref=e623]
+              - paragraph [ref=e624]: Copilot for the drive. Knows your routes, never phones home.
+              - generic [ref=e627]: view spec
+            - article [ref=e629]:
+              - generic [ref=e630]:
+                - generic [ref=e631]:
+                  - generic [ref=e632]: "04"
+                  - generic [ref=e633]: DEV
+                  - generic [ref=e635]: · alpha · internal
+                - generic [ref=e636]:
+                  - img "Meta Quest product placeholder" [ref=e638]
+                  - generic [ref=e639]: preview · quest
+              - heading "Meta Quest" [level=3] [ref=e640]
+              - paragraph [ref=e641]: Spatial Jarvis inside the headset. Memory that follows the room.
+              - generic [ref=e644]: view spec
+    - region "A stack that remembers. From data to proof." [ref=e646]:
+      - generic [ref=e647]:
+        - generic [ref=e650]: § 06 · INFRASTRUCTURE
+        - generic [ref=e651]:
+          - generic [ref=e652]: Stack // 01–04 // data → verification
+          - heading "A stack that remembers. From data to proof." [level=2] [ref=e653]:
+            - generic [ref=e654]: A stack that remembers.
+            - generic [ref=e655]: From data to proof.
+        - generic [ref=e656]:
+          - generic [ref=e657]:
+            - generic [ref=e658]: stack · isometric · 01 → 04
+            - generic [ref=e660]: idle
+          - 'img "Flashback stack — four layers, bottom to top: data, infrastructure, intelligence, verification" [ref=e663]':
+            - generic [ref=e673]:
+              - generic [ref=e675]: "01"
+              - generic [ref=e677]: "02"
+              - generic [ref=e679]: "03"
+              - generic [ref=e681]: "04"
+            - generic [ref=e682] [cursor=pointer]:
+              - generic:
+                - generic: LYR · 01 · Dat
+            - generic [ref=e691] [cursor=pointer]:
+              - generic:
+                - generic: LYR · 02 · Inf
+            - generic [ref=e700] [cursor=pointer]:
+              - generic:
+                - generic: LYR · 03 · Int
+            - generic [ref=e709] [cursor=pointer]:
+              - generic:
+                - generic: LYR · 04 · Ver
+            - generic [ref=e718]:
+              - generic [ref=e721]: "01"
+              - generic [ref=e722]: DATA
+            - generic [ref=e723]:
+              - generic [ref=e726]: "02"
+              - generic [ref=e727]: INFRA
+            - generic [ref=e728]:
+              - generic [ref=e731]: "03"
+              - generic [ref=e732]: INTEL
+            - generic [ref=e733]:
+              - generic [ref=e736]: "04"
+              - generic [ref=e737]: VERIFY
+          - paragraph [ref=e738]:
+            - generic [ref=e739]: hover a layer to reveal its internals
+  - button "Open Next.js Dev Tools" [ref=e747] [cursor=pointer]:
+    - img [ref=e748]
+  - alert [ref=e751]
