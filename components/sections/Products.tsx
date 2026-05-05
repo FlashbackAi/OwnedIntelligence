@@ -79,7 +79,7 @@ const SUB_PRODUCTS: SubProduct[] = [
   },
 ];
 
-const COUNT_TARGET = 55_000_000;
+const COUNT_TARGET = 1800;
 
 export default function Products() {
   const rootRef = useRef<HTMLElement>(null);
@@ -374,7 +374,7 @@ function Featured() {
           </h3>
           <p className="mt-3 text-ink-soft text-[15px] leading-[1.55] max-w-[46ch]">
             Personal Jarvis in your pocket. Voice-first, memory-forward,
-            encrypted end-to-end, and built around the person it serves —
+            encrypted end-to-end, and built around the person it serves -
             not the cloud it lives on.
           </p>
 

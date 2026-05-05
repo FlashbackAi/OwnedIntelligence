@@ -426,21 +426,21 @@ export default function HeroCinematic() {
 
           {/* Sub + CTAs — parallax shifts these slightly less than headline */}
           <div ref={subRef} className="will-change-transform">
-            <p
+            {/* <p
               className="heroc-sub mt-10 md:mt-12 max-w-xl mx-auto text-[17px] md:text-[18px] leading-[1.55] text-ink-soft"
               style={{ opacity: 0 }}
             >
               Building the personal AI —{" "}
               <span className="text-ink">owned by you</span>, remembering your
               life, working for you alone.
-            </p>
+            </p> */}
 
             <div
               className="heroc-cta-row flex flex-col sm:flex-row gap-4 mt-8 md:mt-10 justify-center pointer-events-auto"
               style={{ opacity: 0 }}
             >
               <a
-                href="https://flashbackai.com"
+                href="https://flashbackai.xyz"
                 className="group relative inline-flex items-center justify-center px-8 py-3.5 bg-hotrod text-paper-raised font-mono text-[11px] tracking-[0.22em] uppercase overflow-hidden transition-colors duration-200 hover:bg-hotrod-deep"
                 style={{ clipPath: "polygon(10px 0%, 100% 0%, calc(100% - 10px) 100%, 0% 100%)" }}
               >

@@ -17,8 +17,8 @@ export default function Home() {
       <Manifesto />
       <Thesis />
       <Principles />
-      <Products />
       <Infrastructure />
+      <Products />
       <EnterpriseProof />
       <ClosingManifesto />
       <Footer />
