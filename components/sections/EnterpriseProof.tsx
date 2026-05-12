@@ -101,16 +101,17 @@ export default function EnterpriseProof() {
   return (
     <section
       ref={rootRef}
+      id="independence"
       className="relative py-24 md:py-36"
       aria-labelledby="enterprise-heading"
     >
       <div className="mx-auto max-w-[1240px] px-14">
         <p className="ep-marker font-mono text-[11px] uppercase tracking-widest text-[var(--color-steel)] mb-4">
-          Enterprise 07
+          Enterprise // Partners
         </p>
 
         <h2 id="enterprise-heading" className="ep-headline font-mono text-xl md:text-2xl tracking-widest text-[var(--color-ink)] uppercase mb-12">
-          Partners supporting our boostrapped journey
+          We&apos;ve taken zero funding.
         </h2>
 
         <div className="border-t border-b border-[var(--color-hairline)] bg-[var(--color-paper-sunk)] py-10 mb-10">

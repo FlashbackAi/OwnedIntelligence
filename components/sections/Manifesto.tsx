@@ -32,10 +32,8 @@ const STANZAS: Stanza[] = [
     label: "THE CLAIM",
     body: (
       <>
-        The AI they're building wants{" "}
-        <span className="text-hud-deep">your life</span>. Your photos. Your
-        messages. Your habits. Your attention. All of it, harvested to be sold
-        back to you.
+        The world is racing toward autonomous AI. Agents that learn from your
+        life, then act without you. We think that&apos;s the wrong direction.
       </>
     ),
     colStart: 1,
@@ -47,9 +45,7 @@ const STANZAS: Stanza[] = [
     label: "THE PROBLEM",
     body: (
       <>
-        Memory is the raw material of{" "}
-        <span className="text-hud-deep">agency</span>. When someone else owns
-        the record of who you are, they own the terms of what you can become.
+        When someone else owns your data, they own the terms of who you become.
       </>
     ),
     colStart: 6,
@@ -61,11 +57,8 @@ const STANZAS: Stanza[] = [
     label: "THE ANSWER",
     body: (
       <>
-        A personal AI that runs entirely on{" "}
-        <span className="text-hud-deep">your device</span>. No company server
-        holds your memory — it lives encrypted on decentralized storage,
-        anchored on-chain, owned by you. It answers to you alone, and leaves
-        when you ask it to.
+        AI that runs on your device. Your memory, encrypted, anchored on-chain,
+        owned by you. It answers to you alone. It leaves when you ask it to.
       </>
     ),
     colStart: 1,

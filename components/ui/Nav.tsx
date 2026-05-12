@@ -332,6 +332,7 @@ function BubbleMenu({
                 <a
                   role="menuitem"
                   href={item.href}
+                  onClick={() => setIsMenuOpen(false)}
                   aria-label={item.ariaLabel || item.label}
                   className={[
                     "pill-link",
@@ -401,7 +402,7 @@ function BubbleMenu({
 const FLASHBACK_ITEMS: MenuItem[] = [
   {
     label: "home",
-    href: "#",
+    href: "/",
     ariaLabel: "Home",
     rotation: -4,
     hoverStyles: { bgColor: "#0B0D10", textColor: "#FFFFFF" },
@@ -422,22 +423,22 @@ const FLASHBACK_ITEMS: MenuItem[] = [
   },
   {
     label: "technology",
-    href: "#technology",
+    href: "#infrastructure",
     ariaLabel: "Technology",
     rotation: 4,
     hoverStyles: { bgColor: "#0891B2", textColor: "#FFFFFF" },
   },
   {
     label: "partners",
-    href: "#partners",
+    href: "#independence",
     ariaLabel: "Partners",
     rotation: -4,
     hoverStyles: { bgColor: "#8B6914", textColor: "#FFFFFF" },
   },
   {
-    label: "contact",
-    href: "mailto:hello@flashbacklabs.io",
-    ariaLabel: "Contact",
+    label: "get started",
+    href: "mailto:contact@flashbacklabs.com",
+    ariaLabel: "Get Started",
     rotation: 4,
     hoverStyles: { bgColor: "#2A2F36", textColor: "#FFFFFF" },
   },
@@ -446,13 +447,13 @@ const FLASHBACK_ITEMS: MenuItem[] = [
 function Wordmark() {
   return (
     <span className="font-display text-ink inline-flex items-center gap-2 text-[15px] md:text-[16px] tracking-[-0.03em] leading-none">
-      <span>flashback</span>
+      <span>FLASHBACK</span>
       <span
         className="w-px h-3 bg-gold"
         aria-hidden="true"
         style={{ backgroundColor: "#8B6914" }}
       />
-      <span>labs</span>
+      <span>LABS</span>
     </span>
   );
 }

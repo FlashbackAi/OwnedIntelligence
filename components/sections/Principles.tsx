@@ -63,7 +63,7 @@ const PRINCIPLES: Principle[] = [
     numeral: "03",
     name: "User-Owned",
     description:
-      "Keys, models, logs — all yours. No rented intelligence, no leased memory.",
+      "Keys, models, logs - all yours. No rented intelligence, no leased memory.",
     accentHex: "#B3111A",
     size: 360,
     rotate: 3,
@@ -234,11 +234,11 @@ export default function Principles() {
             id="principles-heading"
             className="principles-heading font-display text-ink leading-[1.06] tracking-[-0.015em] text-[clamp(2rem,4.8vw,3.6rem)]"
           >
-            Four rules we won&rsquo;t break.
+            Four promises we won&rsquo;t break.
           </h2>
           <p className="principles-heading mt-6 text-ink-soft text-[15px] md:text-[16px] max-w-[56ch] leading-[1.55]">
-            The constants we design every product around. Hover a bubble to
-            see it unpack.
+            AI that asks, data that stays private, ownership that stays yours,
+            and actions that can be traced.
           </p>
         </div>
 

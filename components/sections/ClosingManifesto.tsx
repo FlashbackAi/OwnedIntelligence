@@ -170,7 +170,7 @@ export default function ClosingManifesto() {
         <div className="flex items-center justify-center gap-4 mb-20">
           <span className="block h-px w-10 bg-ink/40" aria-hidden="true" />
           <span className="font-mono text-[10.5px] tracking-[0.28em] uppercase text-steel">
-            § 10 · CLOSING
+            § 08 · CLOSING
           </span>
           <span className="block h-px w-10 bg-ink/40" aria-hidden="true" />
         </div>
@@ -226,16 +226,16 @@ export default function ClosingManifesto() {
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mt-10">
             <a
-              href="#"
+              href="/manifesto"
               className="inline-flex items-center justify-center px-7 py-3 rounded-[4px] bg-hotrod text-paper-raised font-mono text-[12px] tracking-[0.12em] uppercase hover:bg-hotrod-deep transition-colors duration-220"
             >
-              Get Flashback AI
+              Read Our Thesis
             </a>
             <a
-              href="mailto:contact@flashbacklabs.com"
+              href="/community"
               className="font-mono text-[12px] tracking-[0.12em] text-steel hover:text-ink transition-colors duration-220"
             >
-              contact@flashbacklabs.com
+              Join Our Community
             </a>
           </div>
         </div>

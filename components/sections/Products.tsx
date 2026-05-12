@@ -48,34 +48,34 @@ type SubProduct = {
 
 const SUB_PRODUCTS: SubProduct[] = [
   {
-    key: "home",
+    key: "teepin",
     numeral: "02",
+    name: "Teepin Mobile",
+    status: "SOON",
+    eta: "Launching May 2025",
+    blurb: "Your device becomes a node. Run open source LLMs locally. Access AI that never phones home.",
+    image: "/images/products/home-companion.svg",
+    alt: "Teepin Mobile product placeholder",
+  },
+  {
+    key: "home",
+    numeral: "03",
     name: "Home Companion",
     status: "SOON",
-    eta: "Q4 · 2026",
-    blurb: "Ambient Jarvis for the household — voice-first, on-device.",
-    image: "/images/products/home-companion.svg",
+    eta: "Q4 2026",
+    blurb: "Ambient AI for your household. Voice-first. Vision-enabled. Proactive, not reactive.",
+    image: "/images/products/car-ai.svg",
     alt: "Home Companion product placeholder",
   },
   {
-    key: "car",
-    numeral: "03",
-    name: "Car AI",
-    status: "SOON",
-    eta: "Q1 · 2027",
-    blurb: "Copilot for the drive. Knows your routes, never phones home.",
-    image: "/images/products/car-ai.svg",
-    alt: "Car AI product placeholder",
-  },
-  {
-    key: "quest",
+    key: "more",
     numeral: "04",
-    name: "Meta Quest",
+    name: "More to Come",
     status: "DEV",
-    eta: "alpha · internal",
-    blurb: "Spatial Jarvis inside the headset. Memory that follows the room.",
+    eta: "Unannounced",
+    blurb: "When it is ready, you will hear it here first.",
     image: "/images/products/meta-quest.svg",
-    alt: "Meta Quest product placeholder",
+    alt: "More to Come product placeholder",
   },
 ];
 
@@ -274,13 +274,13 @@ export default function Products() {
         <div className="products-section-marker flex items-center gap-4">
           <span className="block h-px w-14 bg-ink/50" aria-hidden="true" />
           <span className="font-mono text-[13px] tracking-[0.32em] uppercase text-ink">
-            § 05 · PRODUCTS
+            § 06 · PRODUCTS
           </span>
         </div>
 
         <div className="mt-14 md:mt-20 max-w-[900px]">
           <span className="products-eyebrow block font-mono text-[10.5px] md:text-[11px] tracking-[0.3em] uppercase text-steel mb-5">
-            Products // 01–04 // one Jarvis, four surfaces
+            Products // 01-04 // one vision, four surfaces
           </span>
           <h2
             id="products-heading"
@@ -290,7 +290,7 @@ export default function Products() {
               Four surfaces.
             </span>
             <span className="products-headline-line block">
-              One <span className="text-hotrod">Jarvis</span>.
+              One <span className="text-hotrod">vision</span>.
             </span>
           </h2>
         </div>
@@ -373,9 +373,8 @@ function Featured() {
             Flashback AI
           </h3>
           <p className="mt-3 text-ink-soft text-[15px] leading-[1.55] max-w-[46ch]">
-            Personal Jarvis in your pocket. Voice-first, memory-forward,
-            encrypted end-to-end, and built around the person it serves -
-            not the cloud it lives on.
+            Your personal AI. Voice-first, memory-forward, encrypted
+            end-to-end.
           </p>
 
           <ul className="mt-6 space-y-3">
@@ -385,9 +384,10 @@ function Featured() {
                 "memory intelligence",
                 "remembers you across days, not tokens.",
               ],
+              ["legacy mode", "document a life before it fades."],
               [
-                "alzheimer's care",
-                "flagship use case — cognitive scaffolding that matters.",
+                "parenthood mode",
+                "capture what you would otherwise miss.",
               ],
             ].map(([label, body]) => (
               <li

@@ -48,19 +48,19 @@ const LAYERS: Layer[] = [
     name: "Data",
     short: "DATA",
     kind: "data",
-    thesis: "Encrypted personal memory — yours, portable, permanent.",
-    modules: ["Vault", "On-device store", "E2E sync"],
-    spec: "AES-256 · per-user keys · offline-first",
+    thesis: "Your memories live in storage you own. Encrypted. Decentralized. Portable.",
+    modules: ["Owned storage", "Encryption", "Portability"],
+    spec: "decentralized storage - encrypted - portable",
   },
   {
     idx: 1,
     numeral: "02",
-    name: "Infrastructure",
-    short: "INFRA",
+    name: "Compute",
+    short: "CMPTE",
     kind: "infra",
-    thesis: "Compute that runs beside you, not behind a curtain.",
-    modules: ["Edge runtime", "Sync fabric", "Local models"],
-    spec: "on-device inference · bandwidth-aware",
+    thesis: "Your devices first. Then Teepin network. Then enterprise GPUs - all inside TEEs.",
+    modules: ["Devices", "Teepin network", "TEE GPUs"],
+    spec: "on-device - distributed - trusted execution",
   },
   {
     idx: 2,
@@ -68,9 +68,9 @@ const LAYERS: Layer[] = [
     name: "Intelligence",
     short: "INTEL",
     kind: "intelligence",
-    thesis: "A Jarvis that thinks in context, not in tokens.",
-    modules: ["Retrieval", "Reasoning", "Memory graph"],
-    spec: "personal model · stateful recall",
+    thesis: "Open source models. Optimized for trusted execution. No black boxes. No hidden training.",
+    modules: ["Open models", "TEE optimized", "No hidden training"],
+    spec: "open source - auditable - private",
   },
   {
     idx: 3,
@@ -78,9 +78,9 @@ const LAYERS: Layer[] = [
     name: "Verification",
     short: "VERIFY",
     kind: "verify",
-    thesis: "Proof that what thinks for you answers to you.",
-    modules: ["Attestation", "zk-proofs", "Audit trail"],
-    spec: "signed outputs · third-party verifiable",
+    thesis: "Every action anchored on-chain. Verifiable. Traceable. Open by construction.",
+    modules: ["On-chain anchor", "Traceability", "Audit trail"],
+    spec: "verifiable - traceable - open",
   },
 ];
 
@@ -326,14 +326,14 @@ export default function Infrastructure() {
         <div className="infra-section-marker flex items-center gap-4">
           <span className="block h-px w-14 bg-ink/50" aria-hidden="true" />
           <span className="font-mono text-[13px] tracking-[0.32em] uppercase text-ink">
-            § 06 · INFRASTRUCTURE
+            § 05 · INFRASTRUCTURE
           </span>
         </div>
 
         {/* Header */}
         <div className="mt-14 md:mt-20 max-w-[900px]">
           <span className="infra-eyebrow block font-mono text-[10.5px] md:text-[11px] tracking-[0.3em] uppercase text-steel mb-5">
-            Stack // 01–04 // data → verification
+            Stack // 01-04 // data &gt; verification
           </span>
           <h2
             id="infra-heading"

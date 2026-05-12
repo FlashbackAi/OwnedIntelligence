@@ -15,9 +15,10 @@ import { prefersReducedMotion } from "@/lib/motion";
 import ArcReactor from "../svg/ArcReactor";
 
 const HEADLINE_LINES = [
-  ["In", "a", "world", "where", "AI", "does", "everything,"],
-  ["what's", "left"],
-  ["for", "you ?"],
+  ["When", "autonomous", "agents"],
+  ["do", "everything,"],
+  ["who", "decides"],
+  ["what", "you", "become?"],
 ];
 
 export default function HeroCinematic() {
@@ -426,36 +427,37 @@ export default function HeroCinematic() {
 
           {/* Sub + CTAs — parallax shifts these slightly less than headline */}
           <div ref={subRef} className="will-change-transform">
-            {/* <p
+            <p
               className="heroc-sub mt-10 md:mt-12 max-w-xl mx-auto text-[17px] md:text-[18px] leading-[1.55] text-ink-soft"
               style={{ opacity: 0 }}
             >
-              Building the personal AI —{" "}
-              <span className="text-ink">owned by you</span>, remembering your
-              life, working for you alone.
-            </p> */}
+              Everyone&apos;s building AI that learns from you to do things
+              without you. We&apos;re building AI you own - your data, your
+              models, your decisions. Because the only life worth living is one
+              you control - not one engineered by someone else&apos;s AI.
+            </p>
 
             <div
               className="heroc-cta-row flex flex-col sm:flex-row gap-4 mt-8 md:mt-10 justify-center pointer-events-auto"
               style={{ opacity: 0 }}
             >
               <a
-                href="https://flashbackai.xyz"
+                href="/manifesto"
                 className="group relative inline-flex items-center justify-center px-8 py-3.5 bg-hotrod text-paper-raised font-mono text-[11px] tracking-[0.22em] uppercase overflow-hidden transition-colors duration-200 hover:bg-hotrod-deep"
                 style={{ clipPath: "polygon(10px 0%, 100% 0%, calc(100% - 10px) 100%, 0% 100%)" }}
               >
                 <span aria-hidden="true" className="absolute top-0 right-0 w-2 h-2 border-t border-r border-paper-raised/40 pointer-events-none" />
-                <span style={{ display: "inline-block" }}>Meet Flashback AI →</span>
+                <span style={{ display: "inline-block" }}>Read Our Thesis</span>
               </a>
 
               <a
-                href="/manifesto"
+                href="/community"
                 className="group relative inline-flex items-center justify-center px-8 py-3.5 font-mono text-[11px] tracking-[0.22em] uppercase overflow-hidden transition-colors duration-200 text-ink hover:text-paper-raised"
                 style={{ clipPath: "polygon(10px 0%, 100% 0%, calc(100% - 10px) 100%, 0% 100%)" }}
               >
                 <span aria-hidden="true" className="absolute inset-0 border border-ink transition-colors duration-200 group-hover:border-ink pointer-events-none" style={{ clipPath: "inherit" }} />
                 <span aria-hidden="true" className="absolute inset-0 bg-ink translate-x-[-101%] group-hover:translate-x-0 transition-transform duration-300 ease-out pointer-events-none" />
-                <span className="relative z-10">Read the Thesis</span>
+                <span className="relative z-10">Join Our Community</span>
               </a>
             </div>
           </div>
