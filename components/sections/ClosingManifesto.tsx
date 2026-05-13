@@ -223,7 +223,6 @@ export default function ClosingManifesto() {
         <div ref={signoffRef} className="mt-16">
           <div className="mb-10 space-y-2 text-ink-soft text-[15px] md:text-[16px] leading-[1.55] max-w-[58ch] mx-auto">
             <p>Lean team. Zero funding. One direction.</p>
-            <p>Your AI. Your data. Your decisions.</p>
             <p>
               We are building this for the next decade and we are just getting
               started.
