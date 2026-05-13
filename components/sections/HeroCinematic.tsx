@@ -434,7 +434,7 @@ export default function HeroCinematic() {
               Everyone&apos;s building AI that learns from you to do things
               without you. We&apos;re building AI you own. Your data, your
               models, your decisions. Because the only life worth living is one
-              you control, not one engineered.› by someone else&apos;s AI.
+              you control, not one engineered. By someone else&apos;s AI.
             </p>
 
             <div
