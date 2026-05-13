@@ -15,9 +15,9 @@ export default function Home() {
       <Nav />
       <Hero />
       <Manifesto />
-      <Thesis />
       <Principles />
       <Infrastructure />
+      <Thesis />
       <Products />
       <EnterpriseProof />
       <ClosingManifesto />

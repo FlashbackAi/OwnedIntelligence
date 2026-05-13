@@ -221,8 +221,16 @@ export default function ClosingManifesto() {
 
         {/* Sign-off + CTAs */}
         <div ref={signoffRef} className="mt-16">
+          <div className="mb-10 space-y-2 text-ink-soft text-[15px] md:text-[16px] leading-[1.55] max-w-[58ch] mx-auto">
+            <p>Lean team. Zero funding. One direction.</p>
+            <p>Your AI. Your data. Your decisions.</p>
+            <p>
+              We are building this for the next decade and we are just getting
+              started.
+            </p>
+          </div>
           <p className="font-mono text-[11px] tracking-[0.3em] uppercase text-steel">
-            — FLASHBACK LABS
+            FLASHBACK LABS
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mt-10">
             <a

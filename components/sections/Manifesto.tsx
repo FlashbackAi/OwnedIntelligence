@@ -33,7 +33,7 @@ const STANZAS: Stanza[] = [
     body: (
       <>
         The world is racing toward autonomous AI. Agents that learn from your
-        life, then act without you. We think that&apos;s the wrong direction.
+        life, then act without you. We are heading in the other direction.
       </>
     ),
     colStart: 1,
@@ -58,7 +58,7 @@ const STANZAS: Stanza[] = [
     body: (
       <>
         AI that runs on your device. Your memory, encrypted, anchored on-chain,
-        owned by you. It answers to you alone. It leaves when you ask it to.
+        owned by you. It answers to you alone.And it leaves when you ask it to.
       </>
     ),
     colStart: 1,

@@ -286,13 +286,13 @@ export default function Thesis() {
         <div className="thesis-section-marker flex items-center gap-4">
           <span className="block h-px w-14 bg-ink/50" aria-hidden="true" />
           <span className="font-mono text-[13px] tracking-[0.32em] uppercase text-ink">
-            § 03 · POSITION
+            § 05 · POSITION
           </span>
         </div>
 
         <div className="mt-16 md:mt-24 flex flex-col items-center text-center">
           <span className="thesis-subline font-mono text-[10.5px] md:text-[11px] tracking-[0.3em] uppercase text-steel mb-6">
-            Amplification Zone // a position, not a promise
+            Amplification Zone // this is where we stand
           </span>
           <h3 className="font-display text-ink leading-[1.08] tracking-[-0.015em] text-[clamp(1.9rem,4.6vw,3.4rem)]">
             <span className="thesis-headline-line block">
@@ -534,7 +534,7 @@ function Diagram() {
         className="thesis-marker-readout absolute -translate-x-1/2 font-mono text-[10px] tracking-[0.28em] uppercase text-hud-deep whitespace-nowrap"
         style={{ left: `${MARKER_REST}%`, top: "172px" }}
       >
-        30% · AMPLIFY
+        this is us · AMPLIFY
       </span>
 
       {/* Engineering title block — bottom-right */}
@@ -555,7 +555,7 @@ function Diagram() {
           <div className="border-r border-ink/30 px-3 py-1.5 text-steel">
             by
           </div>
-          <div className="px-3 py-1.5 text-ink">flashback labs · thesis</div>
+          <div className="px-3 py-1.5 text-ink">flashback labs · this is our line</div>
         </div>
       </div>
     </div>

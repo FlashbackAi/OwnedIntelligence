@@ -52,8 +52,8 @@ const SUB_PRODUCTS: SubProduct[] = [
     numeral: "02",
     name: "Teepin Mobile",
     status: "SOON",
-    eta: "Launching May 2025",
-    blurb: "Your device becomes a node. Run open source LLMs locally. Access AI that never phones home.",
+    eta: "Launching May 2026",
+    blurb: "Your device becomes a node in a distributed compute network. Run open source models locally. Contribute compute. Consume compute. AI that never phones home.",
     image: "/images/products/home-companion.svg",
     alt: "Teepin Mobile product placeholder",
   },
@@ -63,7 +63,7 @@ const SUB_PRODUCTS: SubProduct[] = [
     name: "Home Companion",
     status: "SOON",
     eta: "Q4 2026",
-    blurb: "Ambient AI for your household. Voice-first. Vision-enabled. Proactive, not reactive.",
+    blurb: "Ambient AI for your household. Voice-first. Vision-enabled. Proactive, not reactive. Because you are more comfortable recording your family when you own what is recorded.",
     image: "/images/products/car-ai.svg",
     alt: "Home Companion product placeholder",
   },
@@ -73,7 +73,7 @@ const SUB_PRODUCTS: SubProduct[] = [
     name: "More to Come",
     status: "DEV",
     eta: "Unannounced",
-    blurb: "When it is ready, you will hear it here first.",
+    blurb: "We are building more. When it is ready, you will hear it here first.",
     image: "/images/products/meta-quest.svg",
     alt: "More to Come product placeholder",
   },
@@ -374,7 +374,8 @@ function Featured() {
           </h3>
           <p className="mt-3 text-ink-soft text-[15px] leading-[1.55] max-w-[46ch]">
             Your personal AI. Voice-first, memory-forward, encrypted
-            end-to-end.
+            end-to-end. Built around the person it serves, not the cloud it
+            lives on.
           </p>
 
           <ul className="mt-6 space-y-3">

@@ -222,7 +222,7 @@ export default function Principles() {
         <div className="principles-section-marker flex items-center gap-4">
           <span className="block h-px w-14 bg-ink/50" aria-hidden="true" />
           <span className="font-mono text-[13px] tracking-[0.32em] uppercase text-ink">
-            § 04 · PRINCIPLES
+            § 03 · PRINCIPLES
           </span>
         </div>
 
@@ -237,8 +237,8 @@ export default function Principles() {
             Four promises we won&rsquo;t break.
           </h2>
           <p className="principles-heading mt-6 text-ink-soft text-[15px] md:text-[16px] max-w-[56ch] leading-[1.55]">
-            AI that asks, data that stays private, ownership that stays yours,
-            and actions that can be traced.
+            Not guidelines. Not goals. Rules we&rsquo;ve designed every product
+            around from day one.
           </p>
         </div>
 

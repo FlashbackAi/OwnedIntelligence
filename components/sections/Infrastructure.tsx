@@ -28,7 +28,7 @@ import { prefersReducedMotion } from "@/lib/motion";
 
 gsap.registerPlugin(ScrollTrigger);
 
-type LayerKind = "data" | "infra" | "intelligence" | "verify";
+type LayerKind = "data" | "infra" | "intelligence" | "applications";
 
 type Layer = {
   idx: number; // 0 = bottom, 3 = top
@@ -39,6 +39,7 @@ type Layer = {
   thesis: string;
   modules: string[];
   spec: string;
+  partners: string[];
 };
 
 const LAYERS: Layer[] = [
@@ -50,7 +51,8 @@ const LAYERS: Layer[] = [
     kind: "data",
     thesis: "Your memories live in storage you own. Encrypted. Decentralized. Portable.",
     modules: ["Owned storage", "Encryption", "Portability"],
-    spec: "decentralized storage - encrypted - portable",
+    spec: "decentralized storage · encrypted · portable",
+    partners: ["Shelby", "BNB Greenfield", "0G Storage"],
   },
   {
     idx: 1,
@@ -58,9 +60,10 @@ const LAYERS: Layer[] = [
     name: "Compute",
     short: "CMPTE",
     kind: "infra",
-    thesis: "Your devices first. Then Teepin network. Then enterprise GPUs - all inside TEEs.",
+    thesis: "Your devices first. Then Teepin network. Then enterprise GPUs as fallback. All inside TEEs. Every inference verifiable on-chain.",
     modules: ["Devices", "Teepin network", "TEE GPUs"],
-    spec: "on-device - distributed - trusted execution",
+    spec: "on-device · distributed · trusted execution",
+    partners: ["Teepin", "0G Compute"],
   },
   {
     idx: 2,
@@ -68,19 +71,21 @@ const LAYERS: Layer[] = [
     name: "Intelligence",
     short: "INTEL",
     kind: "intelligence",
-    thesis: "Open source models. Optimized for trusted execution. No black boxes. No hidden training.",
+    thesis: "Open source models running inside trusted execution environments. No black boxes. No hidden training. You choose what runs on your devices.",
     modules: ["Open models", "TEE optimized", "No hidden training"],
-    spec: "open source - auditable - private",
+    spec: "open source · auditable · private",
+    partners: ["Qwen", "0G TEE Models"],
   },
   {
     idx: 3,
     numeral: "04",
-    name: "Verification",
-    short: "VERIFY",
-    kind: "verify",
-    thesis: "Every action anchored on-chain. Verifiable. Traceable. Open by construction.",
-    modules: ["On-chain anchor", "Traceability", "Audit trail"],
-    spec: "verifiable - traceable - open",
+    name: "Applications",
+    short: "APPS",
+    kind: "applications",
+    thesis: "Everything built on this stack. Our products and yours. Simple APIs. Simple SDKs. Build without compromising on ownership.",
+    modules: ["Flashback AI", "Teepin", "Catercore"],
+    spec: "built on the stack · owned by you · open to builders",
+    partners: [],
   },
 ];
 
@@ -326,14 +331,14 @@ export default function Infrastructure() {
         <div className="infra-section-marker flex items-center gap-4">
           <span className="block h-px w-14 bg-ink/50" aria-hidden="true" />
           <span className="font-mono text-[13px] tracking-[0.32em] uppercase text-ink">
-            § 05 · INFRASTRUCTURE
+            § 04 · INFRASTRUCTURE
           </span>
         </div>
 
         {/* Header */}
         <div className="mt-14 md:mt-20 max-w-[900px]">
           <span className="infra-eyebrow block font-mono text-[10.5px] md:text-[11px] tracking-[0.3em] uppercase text-steel mb-5">
-            Stack // 01-04 // data &gt; verification
+            Stack // 01-04 // data &gt; applications
           </span>
           <h2
             id="infra-heading"
@@ -346,6 +351,10 @@ export default function Infrastructure() {
               From data to <span className="text-hotrod">proof</span>.
             </span>
           </h2>
+          <p className="infra-headline-line mt-6 text-ink-soft text-[15px] md:text-[16px] max-w-[58ch] leading-[1.55]">
+            Verifiable and auditable on-chain across every layer. That&rsquo;s
+            not a feature. That&rsquo;s how we build.
+          </p>
         </div>
 
         {/* Tower + panel */}
@@ -574,6 +583,28 @@ function DetailPanel({ layer }: { layer: Layer | null }) {
               </span>
             </div>
 
+            {/* Partners */}
+            {layer.partners.length > 0 && (
+              <div className="infra-panel-item mt-3">
+                <div className="flex items-center gap-2 mb-1.5">
+                  <span className="font-mono text-[8px] tracking-[0.34em] uppercase text-steel">
+                    PARTNERS
+                  </span>
+                  <span className="block h-px flex-1 bg-ink/15" />
+                </div>
+                <div className="flex flex-wrap gap-1.5">
+                  {layer.partners.map((p) => (
+                    <span
+                      key={p}
+                      className="font-mono text-[8.5px] tracking-[0.26em] uppercase text-ink/80 border border-ink/25 px-2 py-1"
+                    >
+                      {p}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            )}
+
             {/* Bottom meta row */}
             <div className="infra-panel-item mt-3 flex items-center justify-between">
               <span className="font-mono text-[8.5px] tracking-[0.32em] uppercase text-steel">
@@ -675,7 +706,7 @@ const TowerSVG = forwardRef<SVGSVGElement, TowerProps>(function TowerSVG(
       ref={ref}
       viewBox={`0 0 ${VB_W} ${VB_H}`}
       className="w-full h-auto max-w-none sm:max-w-[520px] lg:max-w-[600px] mx-auto block"
-      aria-label="Flashback stack — four layers, bottom to top: data, infrastructure, intelligence, verification"
+      aria-label="Flashback stack — four layers, bottom to top: data, compute, intelligence, applications"
       onMouseLeave={onLeaveAll}
     >
       <defs>
@@ -715,6 +746,9 @@ const TowerSVG = forwardRef<SVGSVGElement, TowerProps>(function TowerSVG(
 
       {/* Service cables + junctions (behind slabs so they show through translucent walls) */}
       <TowerInfrastructure />
+
+      {/* Verification rail — runs alongside all four layers */}
+      <VerificationRail />
 
       {/* Slabs (bottom → top) */}
       {LAYERS.map((layer) => (
@@ -1189,6 +1223,59 @@ function TowerInfrastructure() {
   );
 }
 
+/* ────── Verification rail — vertical banner alongside all four layers ────── */
+
+function VerificationRail() {
+  const x = CX - HW - 56;
+  const topY = topFaceY(3) - HD;
+  const botY = topFaceY(0) + THICKNESS + HD;
+  const midY = (topY + botY) / 2;
+  return (
+    <g aria-hidden="true" style={{ pointerEvents: "none" }}>
+      <line
+        x1={x}
+        y1={topY}
+        x2={x}
+        y2={botY}
+        stroke="#B3111A"
+        strokeOpacity="0.55"
+        strokeWidth="1"
+        strokeDasharray="3 3"
+      />
+      <line x1={x - 5} y1={topY} x2={x + 5} y2={topY} stroke="#B3111A" strokeOpacity="0.7" strokeWidth="1" />
+      <line x1={x - 5} y1={botY} x2={x + 5} y2={botY} stroke="#B3111A" strokeOpacity="0.7" strokeWidth="1" />
+      {LAYERS.map((l) => {
+        const y = topFaceY(l.idx);
+        return (
+          <line
+            key={l.idx}
+            x1={x - 3}
+            y1={y}
+            x2={x + 3}
+            y2={y}
+            stroke="#B3111A"
+            strokeOpacity="0.5"
+            strokeWidth="0.85"
+          />
+        );
+      })}
+      <text
+        x={x - 10}
+        y={midY}
+        textAnchor="middle"
+        transform={`rotate(-90 ${x - 10} ${midY})`}
+        fontFamily="var(--font-mono, ui-monospace, monospace)"
+        fontSize="9"
+        letterSpacing="3"
+        fill="#B3111A"
+        style={{ textTransform: "uppercase" }}
+      >
+        VERIFIABLE · AUDITABLE · ON-CHAIN ACROSS EVERY LAYER
+      </text>
+    </g>
+  );
+}
+
 /* ────── Antenna above layer 04 ────── */
 
 function TowerAntenna() {
@@ -1333,7 +1420,7 @@ function ModulePattern({ layer, yc }: { layer: Layer; yc: number }) {
       {layer.kind === "data" && <DataPattern yc={yc} />}
       {layer.kind === "infra" && <InfraPattern yc={yc} />}
       {layer.kind === "intelligence" && <IntelligencePattern yc={yc} />}
-      {layer.kind === "verify" && <VerifyPattern yc={yc} />}
+      {layer.kind === "applications" && <VerifyPattern yc={yc} />}
     </g>
   );
 }
