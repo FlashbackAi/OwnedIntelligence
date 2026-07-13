@@ -1,446 +1,79 @@
 "use client";
 
 /**
- * Flashback Labs — Nav (BubbleMenu variant)
+ * Flashback Labs — Nav.
  *
- * Adapted from the React Bits BubbleMenu component.
- * - GSAP animations preserved (one localized exception to our anime.js-only rule).
- * - Pill labels use our display font (Nevera) via font-display.
- * - Logo + toggle bubbles get a 1px hairline border — elevation without shadow,
- *   which on white would read as PowerPoint.
- * - Rotations dialed from ±8° to ±4° — Iron Man precision, not playful.
+ * Top bar: wordmark on the left, hamburger on the right (both rounded
+ * "bubbles" with hairline borders — elevation without shadow).
+ *
+ * Pressing the hamburger blooms the NavReactor — a left-edge semicircular
+ * dial that locks the current scroll section at 3 o'clock and lets you step
+ * to adjacent sections without leaving the page you're reading. Scroll-spy
+ * via IntersectionObserver keeps the active item synced as you scroll.
  */
 
-import type { CSSProperties, ReactNode } from "react";
-import { useEffect, useRef, useState } from "react";
-import { gsap } from "gsap";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { usePathname, useRouter } from "next/navigation";
+import NavReactor, { type NavReactorItem } from "./NavReactor";
 
-type MenuItem = {
-  label: string;
-  href: string;
-  ariaLabel?: string;
-  rotation?: number;
-  hoverStyles?: {
-    bgColor?: string;
-    textColor?: string;
-  };
-};
+/* Section ids in document order on `/`. The dial maps each item to one of
+   these via `sectionId`; the spy picks whichever id is currently mid-screen. */
+const SPY_SECTIONS = [
+  "hero",
+  "manifesto",
+  "thesis",
+  "principles",
+  "infrastructure",
+  "products",
+  "independence",
+  "closing",
+] as const;
 
-type BubbleMenuProps = {
-  logo: ReactNode | string;
-  onMenuClick?: (open: boolean) => void;
-  className?: string;
-  style?: CSSProperties;
-  menuAriaLabel?: string;
-  menuBg?: string;
-  menuContentColor?: string;
-  useFixedPosition?: boolean;
-  items?: MenuItem[];
-  animationEase?: string;
-  animationDuration?: number;
-  staggerDelay?: number;
-};
-
-function BubbleMenu({
-  logo,
-  onMenuClick,
-  className,
-  style,
-  menuAriaLabel = "Toggle menu",
-  menuBg = "#FFFFFF",
-  menuContentColor = "#0B0D10",
-  useFixedPosition = false,
-  items,
-  animationEase = "back.out(1.5)",
-  animationDuration = 0.5,
-  staggerDelay = 0.12,
-}: BubbleMenuProps) {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [showOverlay, setShowOverlay] = useState(false);
-
-  const overlayRef = useRef<HTMLDivElement>(null);
-  const bubblesRef = useRef<HTMLAnchorElement[]>([]);
-  const labelRefs = useRef<HTMLSpanElement[]>([]);
-
-  const menuItems = items?.length ? items : [];
-
-  const containerClassName = [
-    "bubble-menu",
-    useFixedPosition ? "fixed" : "absolute",
-    "left-0 right-0 top-6",
-    "flex items-center justify-between",
-    "gap-4 px-6 md:px-10",
-    "pointer-events-none",
-    "z-[1001]",
-    className,
-  ]
-    .filter(Boolean)
-    .join(" ");
-
-  const handleToggle = () => {
-    const nextState = !isMenuOpen;
-    if (nextState) setShowOverlay(true);
-    setIsMenuOpen(nextState);
-    onMenuClick?.(nextState);
-  };
-
-  useEffect(() => {
-    const overlay = overlayRef.current;
-    const bubbles = bubblesRef.current.filter(Boolean);
-    const labels = labelRefs.current.filter(Boolean);
-    if (!overlay || !bubbles.length) return;
-
-    if (isMenuOpen) {
-      gsap.set(overlay, { display: "flex" });
-      gsap.killTweensOf([...bubbles, ...labels]);
-      gsap.set(bubbles, { scale: 0, transformOrigin: "50% 50%" });
-      gsap.set(labels, { y: 24, autoAlpha: 0 });
-
-      bubbles.forEach((bubble, i) => {
-        const delay = i * staggerDelay + gsap.utils.random(-0.05, 0.05);
-        const tl = gsap.timeline({ delay });
-        tl.to(bubble, {
-          scale: 1,
-          duration: animationDuration,
-          ease: animationEase,
-        });
-        if (labels[i]) {
-          tl.to(
-            labels[i],
-            {
-              y: 0,
-              autoAlpha: 1,
-              duration: animationDuration,
-              ease: "power3.out",
-            },
-            "-=" + animationDuration * 0.9,
-          );
-        }
-      });
-    } else if (showOverlay) {
-      gsap.killTweensOf([...bubbles, ...labels]);
-      gsap.to(labels, {
-        y: 24,
-        autoAlpha: 0,
-        duration: 0.2,
-        ease: "power3.in",
-      });
-      gsap.to(bubbles, {
-        scale: 0,
-        duration: 0.2,
-        ease: "power3.in",
-        onComplete: () => {
-          gsap.set(overlay, { display: "none" });
-          setShowOverlay(false);
-        },
-      });
-    }
-  }, [isMenuOpen, showOverlay, animationEase, animationDuration, staggerDelay]);
-
-  useEffect(() => {
-    const handleResize = () => {
-      if (isMenuOpen) {
-        const bubbles = bubblesRef.current.filter(Boolean);
-        const isDesktop = window.innerWidth >= 900;
-        bubbles.forEach((bubble, i) => {
-          const item = menuItems[i];
-          if (bubble && item) {
-            const rotation = isDesktop ? (item.rotation ?? 0) : 0;
-            gsap.set(bubble, { rotation });
-          }
-        });
-      }
-    };
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, [isMenuOpen, menuItems]);
-
-  return (
-    <>
-      <style>{`
-        .bubble-menu .menu-line {
-          transition: transform 0.3s ease, opacity 0.3s ease;
-          transform-origin: center;
-        }
-        .bubble-menu-items .pill-list .pill-col:nth-child(4):nth-last-child(2) {
-          margin-left: calc(100% / 6);
-        }
-        .bubble-menu-items .pill-list .pill-col:nth-child(4):last-child {
-          margin-left: calc(100% / 3);
-        }
-        @media (min-width: 900px) {
-          .bubble-menu-items .pill-link {
-            transform: rotate(var(--item-rot));
-          }
-          .bubble-menu-items .pill-link:hover {
-            transform: rotate(var(--item-rot)) scale(1.06);
-            background: var(--hover-bg) !important;
-            color: var(--hover-color) !important;
-          }
-          .bubble-menu-items .pill-link:active {
-            transform: rotate(var(--item-rot)) scale(.94);
-          }
-        }
-        @media (max-width: 899px) {
-          .bubble-menu-items {
-            padding-top: 120px;
-            align-items: flex-start;
-          }
-          .bubble-menu-items .pill-list {
-            row-gap: 16px;
-          }
-          .bubble-menu-items .pill-list .pill-col {
-            flex: 0 0 100% !important;
-            margin-left: 0 !important;
-            overflow: visible;
-          }
-          .bubble-menu-items .pill-link {
-            font-size: clamp(1.4rem, 4vw, 3rem);
-            padding: clamp(1rem, 2vw, 2rem) 0;
-            min-height: 80px !important;
-          }
-          .bubble-menu-items .pill-link:hover {
-            transform: scale(1.06);
-            background: var(--hover-bg);
-            color: var(--hover-color);
-          }
-          .bubble-menu-items .pill-link:active {
-            transform: scale(.94);
-          }
-        }
-      `}</style>
-
-      <nav
-        className={containerClassName}
-        style={style}
-        aria-label="Main navigation"
-      >
-        {/* Logo bubble */}
-        <div
-          className={[
-            "bubble logo-bubble",
-            "inline-flex items-center justify-center",
-            "rounded-full",
-            "border border-hairline",
-            "pointer-events-auto",
-            "h-12 md:h-14",
-            "px-5 md:px-7",
-            "gap-2",
-            "will-change-transform",
-          ].join(" ")}
-          aria-label="Flashback Labs"
-          style={{
-            background: menuBg,
-            minHeight: "48px",
-            borderRadius: "9999px",
-          }}
-        >
-          <span className="logo-content inline-flex items-center justify-center h-full">
-            {typeof logo === "string" ? (
-              <img
-                src={logo}
-                alt="Logo"
-                className="bubble-logo max-h-[60%] max-w-full object-contain block"
-              />
-            ) : (
-              logo
-            )}
-          </span>
-        </div>
-
-        {/* Toggle bubble */}
-        <button
-          type="button"
-          className={[
-            "bubble toggle-bubble menu-btn",
-            isMenuOpen ? "open" : "",
-            "inline-flex flex-col items-center justify-center",
-            "rounded-full",
-            "border border-hairline",
-            "pointer-events-auto",
-            "w-12 h-12 md:w-14 md:h-14",
-            "cursor-pointer p-0",
-            "will-change-transform",
-          ].join(" ")}
-          onClick={handleToggle}
-          aria-label={menuAriaLabel}
-          aria-pressed={isMenuOpen}
-          style={{ background: menuBg }}
-        >
-          <span
-            className="menu-line block mx-auto rounded-[2px]"
-            style={{
-              width: 22,
-              height: 1.5,
-              background: menuContentColor,
-              transform: isMenuOpen
-                ? "translateY(3px) rotate(45deg)"
-                : "none",
-            }}
-          />
-          <span
-            className="menu-line short block mx-auto rounded-[2px]"
-            style={{
-              marginTop: "5px",
-              width: 22,
-              height: 1.5,
-              background: menuContentColor,
-              transform: isMenuOpen
-                ? "translateY(-3px) rotate(-45deg)"
-                : "none",
-            }}
-          />
-        </button>
-      </nav>
-
-      {showOverlay && (
-        <div
-          ref={overlayRef}
-          className={[
-            "bubble-menu-items",
-            useFixedPosition ? "fixed" : "absolute",
-            "inset-0",
-            "flex items-center justify-center",
-            "pointer-events-none",
-            "z-[1000]",
-          ].join(" ")}
-          aria-hidden={!isMenuOpen}
-        >
-          <ul
-            className={[
-              "pill-list",
-              "list-none m-0 px-6",
-              "w-full max-w-[1600px] mx-auto",
-              "flex flex-wrap",
-              "gap-x-0 gap-y-2",
-              "pointer-events-auto",
-            ].join(" ")}
-            role="menu"
-            aria-label="Menu links"
-          >
-            {menuItems.map((item, idx) => (
-              <li
-                key={idx}
-                role="none"
-                className={[
-                  "pill-col",
-                  "flex justify-center items-stretch",
-                  "[flex:0_0_calc(100%/3)]",
-                  "box-border",
-                ].join(" ")}
-              >
-                <a
-                  role="menuitem"
-                  href={item.href}
-                  onClick={() => setIsMenuOpen(false)}
-                  aria-label={item.ariaLabel || item.label}
-                  className={[
-                    "pill-link",
-                    "font-display",
-                    "w-full",
-                    "rounded-[999px]",
-                    "no-underline",
-                    "border border-hairline",
-                    "flex items-center justify-center",
-                    "relative",
-                    "transition-[background,color,border-color] duration-300 ease-in-out",
-                    "box-border",
-                    "whitespace-nowrap overflow-hidden",
-                  ].join(" ")}
-                  style={
-                    {
-                      ["--item-rot"]: `${item.rotation ?? 0}deg`,
-                      ["--pill-bg"]: menuBg,
-                      ["--pill-color"]: menuContentColor,
-                      ["--hover-bg"]:
-                        item.hoverStyles?.bgColor || "#f3f4f6",
-                      ["--hover-color"]:
-                        item.hoverStyles?.textColor || menuContentColor,
-                      background: "var(--pill-bg)",
-                      color: "var(--pill-color)",
-                      minHeight: "var(--pill-min-h, 160px)",
-                      padding: "clamp(1.5rem, 3vw, 8rem) 0",
-                      fontSize: "clamp(1.5rem, 4vw, 3.5rem)",
-                      fontWeight: 400,
-                      letterSpacing: "-0.02em",
-                      lineHeight: 0,
-                      willChange: "transform",
-                      height: 10,
-                    } as CSSProperties
-                  }
-                  ref={(el) => {
-                    if (el) bubblesRef.current[idx] = el;
-                  }}
-                >
-                  <span
-                    className="pill-label inline-block"
-                    style={{
-                      willChange: "transform, opacity",
-                      height: "1.2em",
-                      lineHeight: 1.2,
-                    }}
-                    ref={(el) => {
-                      if (el) labelRefs.current[idx] = el;
-                    }}
-                  >
-                    {item.label}
-                  </span>
-                </a>
-              </li>
-            ))}
-          </ul>
-        </div>
-      )}
-    </>
-  );
-}
-
-/* ─────────────────────────────────────────────
-   Flashback Labs nav — thin adapter over BubbleMenu
-   ───────────────────────────────────────────── */
-
-const FLASHBACK_ITEMS: MenuItem[] = [
+/* Item set + their spy targets. `home` is the top of the page (hero), and
+   `thesis` covers the manifesto/thesis/principles run since they're a single
+   editorial unit. `get started` lives at the bottom (closing manifesto). */
+const FLASHBACK_ITEMS: (NavReactorItem & { spySections?: string[] })[] = [
   {
     label: "home",
     href: "/",
     ariaLabel: "Home",
-    rotation: -4,
-    hoverStyles: { bgColor: "#0B0D10", textColor: "#FFFFFF" },
-  },
-  {
-    label: "products",
-    href: "#products",
-    ariaLabel: "Products",
-    rotation: 4,
-    hoverStyles: { bgColor: "#B3111A", textColor: "#FFFFFF" },
+    sectionId: "hero",
+    spySections: ["hero"],
   },
   {
     label: "thesis",
-    href: "/manifesto",
+    href: "/#manifesto",
     ariaLabel: "Thesis",
-    rotation: -4,
-    hoverStyles: { bgColor: "#7A0A12", textColor: "#FFFFFF" },
+    sectionId: "manifesto",
+    spySections: ["manifesto", "thesis", "principles"],
   },
   {
     label: "technology",
-    href: "#infrastructure",
+    href: "/#infrastructure",
     ariaLabel: "Technology",
-    rotation: 4,
-    hoverStyles: { bgColor: "#0891B2", textColor: "#FFFFFF" },
+    sectionId: "infrastructure",
+    spySections: ["infrastructure"],
+  },
+  {
+    label: "products",
+    href: "/#products",
+    ariaLabel: "Products",
+    sectionId: "products",
+    spySections: ["products"],
   },
   {
     label: "partners",
-    href: "#independence",
+    href: "/#independence",
     ariaLabel: "Partners",
-    rotation: -4,
-    hoverStyles: { bgColor: "#8B6914", textColor: "#FFFFFF" },
+    sectionId: "independence",
+    spySections: ["independence"],
   },
   {
     label: "get started",
-    href: "mailto:contact@flashbacklabs.com",
+    href: "/#closing",
     ariaLabel: "Get Started",
-    rotation: 4,
-    hoverStyles: { bgColor: "#2A2F36", textColor: "#FFFFFF" },
+    sectionId: "closing",
+    spySections: ["closing"],
   },
 ];
 
@@ -459,17 +92,239 @@ function Wordmark() {
 }
 
 export default function Nav() {
+  const [open, setOpen] = useState(false);
+  const [activeIndex, setActiveIndex] = useState(0);
+  const pathname = usePathname();
+  const router = useRouter();
+
+  /* While a picked section glides into view, the spy is locked — otherwise
+     every section passing under the viewport would steal the active slot
+     from the item the user just clicked and reshuffle the label arc.
+     `onSettle` runs once the scroll comes to rest (used to close the dial
+     on arrival). */
+  const spyLockRef = useRef(false);
+  const spyLockTimerRef = useRef<number | null>(null);
+  const lockSpyDuringScroll = useCallback((onSettle?: () => void) => {
+    spyLockRef.current = true;
+    if (spyLockTimerRef.current) window.clearTimeout(spyLockTimerRef.current);
+    const release = () => {
+      spyLockRef.current = false;
+      if (spyLockTimerRef.current) window.clearTimeout(spyLockTimerRef.current);
+      spyLockTimerRef.current = null;
+      window.removeEventListener("scrollend", release);
+      onSettle?.();
+    };
+    window.addEventListener("scrollend", release);
+    // Fallback for browsers without scrollend (Safari).
+    spyLockTimerRef.current = window.setTimeout(release, 1800);
+  }, []);
+
+  /* Build a lookup from section-id → menu-item-index so the spy can
+     translate observed sections into the right active item. */
+  const sectionToIndex = useMemo(() => {
+    const map = new Map<string, number>();
+    FLASHBACK_ITEMS.forEach((item, i) => {
+      (item.spySections ?? []).forEach((id) => map.set(id, i));
+    });
+    return map;
+  }, []);
+
+  /* Scroll-spy — only meaningful on the home page where the anchored
+     sections live. */
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    if (pathname !== "/") return;
+
+    const nodes: HTMLElement[] = [];
+    // Treat the very top of the page as "hero" — there's no explicit id on
+    // HeroCinematic's <section>, so we synthesize a sentinel at the top.
+    let sentinel = document.getElementById("hero");
+    if (!sentinel) {
+      sentinel = document.createElement("div");
+      sentinel.id = "hero";
+      sentinel.setAttribute("aria-hidden", "true");
+      sentinel.style.cssText =
+        "position:absolute;top:0;left:0;width:1px;height:80vh;pointer-events:none;";
+      document.body.appendChild(sentinel);
+    }
+    SPY_SECTIONS.forEach((id) => {
+      const el = document.getElementById(id);
+      if (el) nodes.push(el as HTMLElement);
+    });
+    if (nodes.length === 0) return;
+
+    // Track each observed section's current intersection ratio; whichever
+    // section has the largest ratio (and is at least 15% in view) wins.
+    const ratios = new Map<string, number>();
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const e of entries) {
+          ratios.set(e.target.id, e.isIntersecting ? e.intersectionRatio : 0);
+        }
+        let bestId: string | null = null;
+        let bestRatio = 0.15;
+        for (const [id, r] of ratios) {
+          if (r > bestRatio) {
+            bestRatio = r;
+            bestId = id;
+          }
+        }
+        if (bestId && !spyLockRef.current) {
+          const idx = sectionToIndex.get(bestId);
+          if (idx !== undefined) {
+            setActiveIndex((cur) => (cur === idx ? cur : idx));
+          }
+        }
+      },
+      {
+        // Multiple thresholds so the spy responds smoothly as a section scrolls
+        // through, not just at the moment it crosses a single line.
+        threshold: [0.15, 0.3, 0.5, 0.7, 0.9],
+      },
+    );
+    nodes.forEach((n) => observer.observe(n));
+
+    return () => {
+      observer.disconnect();
+      if (sentinel && sentinel.parentElement && sentinel.id === "hero") {
+        // Only remove the synthetic sentinel; never the real section.
+        const isSynthetic = sentinel.getAttribute("aria-hidden") === "true";
+        if (isSynthetic) sentinel.parentElement.removeChild(sentinel);
+      }
+    };
+  }, [pathname, sectionToIndex]);
+
+  /* Lock body scroll while open? — intentionally no. The dial is meant to
+     hover *while you read*. It closes when a picked section arrives, or
+     early via Esc / outside click. */
+
+  const handleSelect = useCallback(
+    (item: NavReactorItem, idx: number) => {
+      setActiveIndex(idx);
+
+      // In-page picks keep the dial open while the page glides to the
+      // section, then close it on arrival. Esc/outside click close early.
+      if (item.href.startsWith("/#")) {
+        const id = item.href.slice(2);
+        const el = document.getElementById(id);
+        if (el && pathname === "/") {
+          // Already there → no scroll will happen (and no scrollend);
+          // treat the pick as arrival.
+          if (Math.abs(el.getBoundingClientRect().top) < 4) {
+            setOpen(false);
+            return;
+          }
+          lockSpyDuringScroll(() => setOpen(false));
+          el.scrollIntoView({ behavior: "smooth", block: "start" });
+          return;
+        }
+        // Not on home — route there and let the hash do the rest.
+        router.push(item.href);
+        setOpen(false);
+        return;
+      }
+
+      // "home" while already on home: glide to the top, close on arrival.
+      if (item.href === "/" && pathname === "/") {
+        if (window.scrollY < 4) {
+          setOpen(false);
+          return;
+        }
+        lockSpyDuringScroll(() => setOpen(false));
+        window.scrollTo({ top: 0, behavior: "smooth" });
+        return;
+      }
+
+      // mailto, external, or full routes leave the page — close the dial.
+      if (item.href.startsWith("mailto:") || item.href.startsWith("http")) {
+        window.location.href = item.href;
+        setOpen(false);
+        return;
+      }
+
+      router.push(item.href);
+      setOpen(false);
+    },
+    [pathname, router, lockSpyDuringScroll],
+  );
+
+  /* The reactor toggle: morph the hamburger glyph into a tiny triangle when
+     open — echoing the core glyph on the dial. */
+  const toggleRef = useRef<HTMLButtonElement>(null);
+
   return (
-    <BubbleMenu
-      logo={<Wordmark />}
-      items={FLASHBACK_ITEMS}
-      menuAriaLabel="Toggle navigation"
-      menuBg="#FFFFFF"
-      menuContentColor="#0B0D10"
-      useFixedPosition={true}
-      animationEase="back.out(1.4)"
-      animationDuration={0.5}
-      staggerDelay={0.1}
-    />
+    <>
+      <nav
+        className="fixed left-0 right-0 top-6 z-1100 flex items-center justify-between gap-4 px-6 md:px-10 pointer-events-none"
+        aria-label="Main navigation"
+      >
+        {/* Logo bubble */}
+        <div
+          className="inline-flex items-center justify-center rounded-full border border-hairline pointer-events-auto h-12 md:h-14 px-5 md:px-7 gap-2"
+          aria-label="Flashback Labs"
+          style={{ background: "#FFFFFF", minHeight: "48px" }}
+        >
+          <Wordmark />
+        </div>
+
+        {/* Toggle bubble — hamburger / reactor pip */}
+        <button
+          ref={toggleRef}
+          type="button"
+          className="relative inline-flex flex-col items-center justify-center rounded-full border border-hairline pointer-events-auto w-12 h-12 md:w-14 md:h-14 cursor-pointer p-0 transition-colors"
+          onClick={() => setOpen((v) => !v)}
+          aria-label={open ? "Close navigation" : "Open navigation"}
+          aria-pressed={open}
+          aria-expanded={open}
+          style={{ background: "#FFFFFF" }}
+        >
+          {open ? (
+            // Mini triangle — same glyph as the dial's hud core.
+            <svg
+              viewBox="-12 -12 24 24"
+              width="20"
+              height="20"
+              aria-hidden="true"
+            >
+              <polygon
+                points="0,-7 6.1,3.5 -6.1,3.5"
+                fill="var(--color-hud-deep)"
+                stroke="var(--color-ink)"
+                strokeWidth="1.1"
+                strokeLinejoin="miter"
+              />
+            </svg>
+          ) : (
+            <>
+              <span
+                className="block mx-auto rounded-[2px]"
+                style={{
+                  width: 22,
+                  height: 1.5,
+                  background: "#0B0D10",
+                }}
+              />
+              <span
+                className="block mx-auto rounded-[2px]"
+                style={{
+                  marginTop: "5px",
+                  width: 22,
+                  height: 1.5,
+                  background: "#0B0D10",
+                }}
+              />
+            </>
+          )}
+        </button>
+      </nav>
+
+      <NavReactor
+        items={FLASHBACK_ITEMS}
+        activeIndex={activeIndex}
+        open={open}
+        onClose={() => setOpen(false)}
+        onSelect={handleSelect}
+      />
+    </>
   );
 }
